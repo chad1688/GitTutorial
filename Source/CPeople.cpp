@@ -5,6 +5,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "CPeople.h"
+#include "map.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -88,10 +89,41 @@ namespace game_framework {
 		animation4.AddBitmap("RES/back3.bmp", RGB(255, 255, 255));
 	}
 
+
 	void CPeople::OnMove()
 	{
 		const int STEP_SIZE = 2;
-
+		/*if (map.hitpeople(this) == true) {
+			if (isMovingLeft) {
+				animation.OnMove();
+			}
+			if (isMovingRight) {
+				animation3.OnMove();
+			}
+			if (isMovingUp) {
+				animation2.OnMove();
+			}
+			if (isMovingDown) {
+				animation4.OnMove();
+			}
+		} else {
+			if (isMovingLeft) {
+				x -= STEP_SIZE;
+				animation.OnMove();
+			}
+			if (isMovingRight) {
+				x += STEP_SIZE;
+				animation3.OnMove();
+			}
+			if (isMovingUp) {
+				y -= STEP_SIZE;
+				animation2.OnMove();
+			}
+			if (isMovingDown) {
+				y += STEP_SIZE;
+				animation4.OnMove();
+			}
+		}*/
 		if (isMovingLeft) {
 			x -= STEP_SIZE;
 			animation.OnMove();
@@ -108,6 +140,8 @@ namespace game_framework {
 			y += STEP_SIZE;
 			animation4.OnMove();
 		}
+		
+		
 	}
 
 	void CPeople::SetMovingDown(bool flag)

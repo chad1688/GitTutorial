@@ -4,7 +4,7 @@ namespace game_framework {
 	// 看懂就可以改寫成自己的程式了
 	/////////////////////////////////////////////////////////////////////////////
 
-	class CPeople
+	class CPeople 
 	{
 	public:
 		CPeople();
@@ -27,7 +27,7 @@ namespace game_framework {
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
-		void SetXY(int nx, int ny);		// 設定擦子左上角座標
+		void SetXY(int nx, int ny);		// 設定擦子左上角座標*/
 	protected:
 		CMovingBitmap start_infrontof;
 		CMovingBitmap start_left;

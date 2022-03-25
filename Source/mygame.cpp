@@ -247,6 +247,7 @@ namespace game_framework {
 		// 移動擦子
 		//
 		people.OnMove();
+
 		//
 		// 判斷擦子是否碰到球
 		//
@@ -291,6 +292,8 @@ namespace game_framework {
 		people.LoadBitmapinfrontof();
 		people.LoadBitmapleft();
 		people.LoadBitmapright();
+		whiltbackground.LoadBitmap("RES/whilt.bmp");
+		map.LoadBitmap();
 		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 		//
 		// 完成部分Loading動作，提高進度
@@ -386,6 +389,8 @@ namespace game_framework {
 		for (int i = 0; i < NUMBALLS; i++)
 			ball[i].OnShow();				// 貼上第i號球
 		bball.OnShow();						// 貼上彈跳的球
+		whiltbackground.ShowBitmap();
+		map.OnShow();
 		people.OnShow();					// 貼上擦子
 		//
 		//  貼上左上及右下角落的圖

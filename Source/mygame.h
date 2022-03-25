@@ -41,6 +41,7 @@
 #include "CPeople.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
+#include "map.h"
 
 namespace game_framework {
 	///////////////////////////////s//////////////////////////////////////////////
@@ -94,6 +95,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		const int		NUMBALLS;	// 球的總數
+		CMovingBitmap	whiltbackground;
 		CMovingBitmap	background;	// 背景圖
 		CMovingBitmap	help;		// 說明圖
 		CBall			*ball;		// 球的陣列
@@ -101,6 +103,7 @@ namespace game_framework {
 		CPeople			people;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
+		Cmap			map;
 		int test = 0;
 
 	};
