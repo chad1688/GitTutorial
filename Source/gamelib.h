@@ -201,7 +201,6 @@ public:
 	void  LoadBitmap(char *,COLORREF=CLR_INVALID);	// 載入圖，指定圖的檔名及透明色
 	void  SetTopLeft(int,int);			// 將圖的左上角座標移至 (x,y)
 	void  ShowBitmap();					// 將圖貼到螢幕
-	//void  ShowBitmap(double times);
 	void  ShowBitmap(double factor);	// 將圖貼到螢幕 factor < 1時縮小，>1時放大。注意：需要VGA卡硬體的支援，否則會很慢
 	void  ShowBitmap(CMovingBitmap &);	// 將圖貼到到另一張圖上 (僅供特殊用途)
 	int   Top();						// 取得圖形的左上角的 y 座標
@@ -230,7 +229,6 @@ public:
 	int   Left();					// 取得動畫的左上角的 x 座標
 	void  OnMove();					// 依頻率更換bitmap
 	void  OnShow();					// 將動畫貼到螢幕
-	//void  OnMove_stop();
 	void  Reset();					// 重設播放順序回到第一張圖形
 	void  SetDelayCount(int);		// 設定動畫播放速度的常數(越大越慢)
 	void  SetTopLeft(int,int);		// 將動畫的左上角座標移至 (x,y)

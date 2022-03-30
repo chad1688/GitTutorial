@@ -35,14 +35,10 @@
 #define IDB_HELP                        155
 #define IDB_BITMAP2                     156
 #define IDB_LOADING                     156
-#define back1                           157
-#define back2                           158
-#define back3                           159
-#define infrontof                       160
-#define infrontof2                      161
-#define IDB_BITMAP4                     162
-#define infrontof3                      162
-#define IDB_BITMAP3                     163
+#define IDB_Title                       157
+#define IDB_Back                        158
+#define IDB_BITMAP3                     159
+#define IDB_Start                       159
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -55,7 +51,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        164
+#define _APS_NEXT_RESOURCE_VALUE        160
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

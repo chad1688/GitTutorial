@@ -38,13 +38,12 @@
  *      3. Use ShowInitProgress(percent) to display loading progress.
 */
 
-#include "CPeople.h"
+#include "CEraser.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
-#include "map.h"
 
 namespace game_framework {
-	///////////////////////////////s//////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////
 	// Constants
 	/////////////////////////////////////////////////////////////////////////////
 
@@ -70,6 +69,8 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap logo;								// csie的logo
+		CMovingBitmap back;								// 灰色背景
+		CMovingBitmap start;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -95,17 +96,13 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		const int		NUMBALLS;	// 球的總數
-		CMovingBitmap	whiltbackground;
 		CMovingBitmap	background;	// 背景圖
 		CMovingBitmap	help;		// 說明圖
 		CBall			*ball;		// 球的陣列
 		CMovingBitmap	corner;		// 角落圖
-		CPeople			people;		// 拍子
+		CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
-		Cmap			map;
-		int test = 0;
-
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

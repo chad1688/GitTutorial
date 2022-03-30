@@ -8,7 +8,7 @@ namespace game_framework {
 	{
 	public:
 		CBall();
-		bool HitPeople(CPeople *eraser);						// 是否碰到擦子
+		bool HitEraser(CEraser *eraser);						// 是否碰到擦子
 		bool IsAlive();											// 是否活著
 		void LoadBitmap();										// 載入圖形
 		void OnMove();											// 移動
@@ -18,7 +18,7 @@ namespace game_framework {
 		void SetDelay(int d);									// 設定旋轉的速度
 	protected:
 		CMovingBitmap bmp;			// 球的圖
-		CMovingBitmap bmp_center;	// 圓心的圖
+		CMovingBitmap bmp_center;	// 圓心的圖			
 		int x, y;					// 圓心的座標
 		int dx, dy;					// 球距離圓心的位移量
 		int index;					// 球的「角度」，0-17表示0-360度
