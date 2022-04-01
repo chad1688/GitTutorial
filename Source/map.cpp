@@ -10,50 +10,38 @@
 #include "CPeople.h"
 
 namespace game_framework {
-	Cmap::Cmap()
-		:X(0), Y(0), MW(59), MH(45)
-	{
-		int a = 1;
+	Cmap::Cmap( ) {
+		x = 0;
+		y = -150;
 	}
 
-
-	void Cmap::LoadBitmap()
-	{
-		Mapobj.LoadBitmap("RES/wall2.bmp");
-	}
-	
-
-
-	bool Cmap::isObj(int x, int y) {
-		if (this->map[y][x] != 0) {
-			return true;
-		}
-		return false;
+	void Cmap::LoadBitmap() {
+		this->map.LoadBitmap("./RES/background.bmp",RGB(0,0,0));
 	}
 
-	
-
-	void Cmap::interaction(int x, int y) {
-		int ID = this->map[y][x];
-		if (ID > 7 && ID < 13) {
-			map[y][x] = ID + 5;
-		}
+	void Cmap::OnMove_left() {
+		if(x > -855)
+			this->x -=5;
 	}
 
-	void Cmap::OnShow()
-	{
-		for (int i = 0; i < 11; i++) {
-			for (int j = 0; j < 11; j++) {
-				int ID = this->map[i][j];
-				if (ID > 0) {
-					Mapobj.SetTopLeft(X + (MW * j), Y + (MH * i));
-					Mapobj.ShowBitmap(0.2);
-				}
-			}
+	void Cmap::OnMove_right() {
+		if(x<0)
+			this->x += 5;
+	}
+
+	void Cmap::OnMove_up() {
+		if (y > -150)
+			this->y -= 5;
+	}
+
+	void Cmap::OnMove_down() {
+		if (y <0) {
+			this->y += 5;
 		}
 	}
-	void Cmap::test(int num) {
-		map[0][0] = num;
 
+	void Cmap::OnShow() {
+		this->map.SetTopLeft(x, y);
+		this->map.ShowBitmap();
 	}
 }

@@ -1,3 +1,4 @@
+#include "map.h"
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class提供可以用鍵盤或滑鼠控制的擦子
@@ -12,6 +13,7 @@ namespace game_framework {
 		int  GetY1();					// 擦子左上角 y 座標
 		int  GetX2();					// 擦子右下角 x 座標
 		int  GetY2();					// 擦子右下角 y 座標
+		void Getmapaddress(Cmap *m);
 		void Initialize();				// 設定擦子為初始值
 		void LoadStartinfrontof();
 		void LoadStartleft();
@@ -22,6 +24,7 @@ namespace game_framework {
 		void LoadBitmapright();
 		void LoadBitmapback();
 		void OnMove();					// 移動擦子
+		void OnMove(int MW, int MH);
 		void OnShow();					// 將擦子圖形貼到畫面
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
@@ -37,6 +40,7 @@ namespace game_framework {
 		CAnimation animation2;
 		CAnimation animation3;
 		CAnimation animation4;
+		Cmap *map;
 		int infrontof1 = 1, left = 0, right = 0, back = 0;
 		int x, y;					// 擦子左上角座標
 		int map_x = 6, map_y = 7;	//人物在地圖的位置

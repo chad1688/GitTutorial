@@ -246,8 +246,6 @@ namespace game_framework {
 		//
 		// 移動擦子
 		//
-		int people_x = 6;
-		int people_y = 4;
 
 		people.OnMove();
 
@@ -296,7 +294,7 @@ namespace game_framework {
 		people.LoadBitmapleft();
 		people.LoadBitmapright();
 		whiltbackground.LoadBitmap("RES/whilt.bmp");
-		map.LoadBitmap();
+		
 		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 		//
 		// 完成部分Loading動作，提高進度
@@ -317,6 +315,8 @@ namespace game_framework {
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 		//
+		map.LoadBitmap();
+		people.Getmapaddress(&map);
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -402,5 +402,6 @@ namespace game_framework {
 		corner.ShowBitmap();
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
+		
 	}
 }
