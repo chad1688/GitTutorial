@@ -21,6 +21,7 @@ namespace game_framework {
 		void Initialize();				// 設定擦子為初始值
 		void LoadBitmap();
 		void LoadAnimation();
+		void shot();
 		void OnMove();					// 移動擦子
 		void OnShow();					// 將擦子圖形貼到畫面
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動

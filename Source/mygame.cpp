@@ -253,7 +253,31 @@ namespace game_framework {
 			}
 		}
 		if (people.GetisMovingdown() && !people.GetisMovingup() && !people.GetisMovingleft() && !people.GetisMovingright()) {
-			if (map.isObject(people.GetX2(), people.GetY2()+10) && map.isObject(people.GetX1(), people.GetY2() + 10)) {
+			if (map.isObject(people.GetX2(), people.GetY2() + 10) && map.isObject(people.GetX1(), people.GetY2() + 10)) {
+				people.OnMove();
+			}
+		}
+
+		if (people.GetisMovingup() && !people.GetisMovingdown() && people.GetisMovingleft() && !people.GetisMovingright()) {
+			if (map.isObject(people.GetX1(), people.GetY1() - 1) && map.isObject(people.GetX2(), people.GetY1() - 1) && map.isObject(people.GetX1()- 1, people.GetY1()) && map.isObject(people.GetX1() - 1, people.GetY2())) {
+				people.OnMove();
+			}
+		}
+
+		if (people.GetisMovingup() && !people.GetisMovingdown() && !people.GetisMovingleft() && people.GetisMovingright()) {
+			if (map.isObject(people.GetX1(), people.GetY1() - 1) && map.isObject(people.GetX2(), people.GetY1() - 1) && map.isObject(people.GetX2() + 10, people.GetY2()) && map.isObject(people.GetX2() + 10, people.GetY1())) {
+				people.OnMove();
+			}
+		}
+
+		if (people.GetisMovingdown() && !people.GetisMovingup() && people.GetisMovingleft() && !people.GetisMovingright()) {
+			if (map.isObject(people.GetX2(), people.GetY2() + 10) && map.isObject(people.GetX1(), people.GetY2() + 10) && map.isObject(people.GetX1() - 1, people.GetY1()) && map.isObject(people.GetX1() - 1, people.GetY2())) {
+				people.OnMove();
+			}
+		}
+
+		if (people.GetisMovingdown() && !people.GetisMovingup() && !people.GetisMovingleft() && people.GetisMovingright()) {
+			if (map.isObject(people.GetX2(), people.GetY2() + 10) && map.isObject(people.GetX1(), people.GetY2() + 10) && map.isObject(people.GetX2() + 10, people.GetY2()) && map.isObject(people.GetX2() + 10, people.GetY1())) {
 				people.OnMove();
 			}
 		}

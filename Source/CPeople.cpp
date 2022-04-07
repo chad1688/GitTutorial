@@ -91,6 +91,10 @@ namespace game_framework {
 		animation_back.AddBitmap("RES/back3.bmp", RGB(184, 184, 184));
 	}
 
+	void CPeople::shot() {
+
+	}
+
 	void CPeople::OnMove()
 	{
 		const int STEP_SIZE = 5;
