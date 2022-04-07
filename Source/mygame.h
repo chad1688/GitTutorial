@@ -104,6 +104,9 @@ namespace game_framework {
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
 		Cmap			map;
+		CMovingBitmap	Enemy;		//敵人
+		int				eneX, eneY;
+
 		int test = 0;
 
 	};

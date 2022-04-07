@@ -59,6 +59,7 @@
 #include "gamelib.h"
 #include "mygame.h"
 
+
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -191,6 +192,7 @@ namespace game_framework {
 		: CGameState(g), NUMBALLS(28)
 	{
 		ball = new CBall[NUMBALLS];
+		eneX = eneY = 0;
 	}
 
 	CGameStateRun::~CGameStateRun()
@@ -270,6 +272,27 @@ namespace game_framework {
 		// 移動彈跳的球
 		//
 		bball.OnMove();
+
+		//設定敵人跟隨腳色
+		if (eneX < (people.GetX1()+1)) {
+			eneX += 1;
+		}
+		else if (eneX > (people.GetX1() + 1)){
+			eneX += -1;
+		}
+		else {
+			eneX = eneX;
+		}
+		if (eneY < (people.GetY1() + 1)) {
+			eneY += 1;
+		}
+		else if (eneY > (people.GetY1() + 1)) {
+			eneY += -1;
+		}
+		else {
+			eneY = eneY;
+		}
+		Enemy.SetTopLeft(eneX, eneY);
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -294,6 +317,7 @@ namespace game_framework {
 		people.LoadBitmapleft();
 		people.LoadBitmapright();
 		whiltbackground.LoadBitmap("RES/whilt.bmp");
+		Enemy.LoadBitmap("RES/back.bmp");		//敵人圖
 		
 		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 		//
@@ -402,6 +426,6 @@ namespace game_framework {
 		corner.ShowBitmap();
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
-		
+		Enemy.ShowBitmap();		//展現敵人
 	}
 }

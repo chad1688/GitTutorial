@@ -11,16 +11,16 @@
 
 namespace game_framework {
 	Cmap::Cmap( ) {
-		x = 0;
-		y = -150;
+		x = -1045;
+		y = -245;
 	}
 
 	void Cmap::LoadBitmap() {
-		this->map.LoadBitmap("./RES/background.bmp",RGB(0,0,0));
+		this->map.LoadBitmap("./RES/69.bmp",RGB(0,0,0));
 	}
 
 	void Cmap::OnMove_left() {
-		if(x > -855)
+		if(x > -1045)
 			this->x -=5;
 	}
 
@@ -30,7 +30,7 @@ namespace game_framework {
 	}
 
 	void Cmap::OnMove_up() {
-		if (y > -150)
+		if (y > -610)
 			this->y -= 5;
 	}
 
