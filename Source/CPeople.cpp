@@ -34,12 +34,12 @@ namespace game_framework {
 
 	int CPeople::GetX2()
 	{
-		return x + animation.Width();
+		return x + animation_left.Width();
 	}
 
 	int CPeople::GetY2()
 	{
-		return y + animation.Height();
+		return y + animation_left.Height();
 	}
 
 
@@ -69,49 +69,27 @@ namespace game_framework {
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	}
 
-	void CPeople::LoadStartinfrontof() {
+	void CPeople::LoadBitmap() {
 		start_infrontof.LoadBitmap("RES/infrontof3.bmp", RGB(184, 184, 184));
-	}
-
-	void CPeople::LoadStartleft() {
 		start_left.LoadBitmap("RES/left3.bmp", RGB(184, 184, 184));
-	}
-
-	void CPeople::LoadStartright() {
 		start_right.LoadBitmap("RES/right3.bmp", RGB(184, 184, 184));
-	}
-
-	void CPeople::LoadStartback() {
 		start_back.LoadBitmap("RES/back3.bmp", RGB(184, 184, 184));
 	}
-	void CPeople::LoadBitmapleft()
-	{
-		animation.AddBitmap("RES/left.bmp", RGB(184, 184, 184));
-		animation.AddBitmap("RES/left2.bmp", RGB(184, 184, 184));
-		animation.AddBitmap("RES/left3.bmp", RGB(184, 184, 184));
-	}
 
-	void CPeople::LoadBitmapinfrontof()
-	{
-		animation2.AddBitmap("RES/inforntof.bmp", RGB(184, 184, 184));
-		animation2.AddBitmap("RES/infrontof2.bmp", RGB(184, 184, 184));
-		animation2.AddBitmap("RES/infrontof3.bmp", RGB(184, 184, 184));
+	void CPeople::LoadAnimation() {
+		animation_left.AddBitmap("RES/left.bmp", RGB(184, 184, 184));
+		animation_left.AddBitmap("RES/left2.bmp", RGB(184, 184, 184));
+		animation_left.AddBitmap("RES/left3.bmp", RGB(184, 184, 184));
+		animation_infrontof.AddBitmap("RES/inforntof.bmp", RGB(184, 184, 184));
+		animation_infrontof.AddBitmap("RES/infrontof2.bmp", RGB(184, 184, 184));
+		animation_infrontof.AddBitmap("RES/infrontof3.bmp", RGB(184, 184, 184));
+		animation_right.AddBitmap("RES/right.bmp", RGB(184, 184, 184));
+		animation_right.AddBitmap("RES/right2.bmp", RGB(184, 184, 184));
+		animation_right.AddBitmap("RES/right3.bmp", RGB(184, 184, 184));
+		animation_back.AddBitmap("RES/back.bmp", RGB(184, 184, 184));
+		animation_back.AddBitmap("RES/back2.bmp", RGB(184, 184, 184));
+		animation_back.AddBitmap("RES/back3.bmp", RGB(184, 184, 184));
 	}
-
-	void CPeople::LoadBitmapright()
-	{
-		animation3.AddBitmap("RES/right.bmp", RGB(184, 184, 184));
-		animation3.AddBitmap("RES/right2.bmp", RGB(184, 184, 184));
-		animation3.AddBitmap("RES/right3.bmp", RGB(184, 184, 184));
-	}
-
-	void CPeople::LoadBitmapback()
-	{
-		animation4.AddBitmap("RES/back.bmp", RGB(184, 184, 184));
-		animation4.AddBitmap("RES/back2.bmp", RGB(184, 184, 184));
-		animation4.AddBitmap("RES/back3.bmp", RGB(184, 184, 184));
-	}
-
 
 	void CPeople::OnMove()
 	{
@@ -121,21 +99,21 @@ namespace game_framework {
 			if (map->x < 0) {
 				if (x > 300) {
 					x -= STEP_SIZE;
-					animation.OnMove();
+					animation_left.OnMove();
 				}
 				else {
 					map->OnMove_right();
-					animation.OnMove();
+					animation_left.OnMove();
 				}
 			}
 			else {
 				if (x == 0) {
 					x = STEP_SIZE;
-					animation.OnMove();
+					animation_left.OnMove();
 				}
 				else {
 					x -= STEP_SIZE;
-					animation.OnMove();
+					animation_left.OnMove();
 				}
 			}
 		}
@@ -143,20 +121,20 @@ namespace game_framework {
 			if (map->x > -1045) {
 				if (x < 300) {
 					x += STEP_SIZE;
-					animation3.OnMove();
+					animation_right.OnMove();
 				}
 				else {
 					map->OnMove_left();
-					animation3.OnMove();
+					animation_right.OnMove();
 				}
 			}
 			else {
 				if (x == 605) {
-					animation3.OnMove();
+					animation_right.OnMove();
 				}
 				else {
 					x += STEP_SIZE;
-					animation3.OnMove();
+					animation_right.OnMove();
 				}
 			}
 		}
@@ -164,21 +142,21 @@ namespace game_framework {
 			if (map->y < 0) {
 				if (y > 300) {
 					y -= STEP_SIZE;
-					animation2.OnMove();
+					animation_infrontof.OnMove();
 				}
 				else {
 					map->OnMove_down();
-					animation2.OnMove();
+					animation_infrontof.OnMove();
 				}
 			}
 			else {
 				if (y == 0) {
 					y = STEP_SIZE;
-					animation2.OnMove();
+					animation_infrontof.OnMove();
 				}
 				else {
 					y -= STEP_SIZE;
-					animation2.OnMove();
+					animation_infrontof.OnMove();
 				}
 			}
 		}
@@ -186,20 +164,20 @@ namespace game_framework {
 			if (map->y > -610) {
 				if (y < 300) {
 					y += STEP_SIZE;
-					animation4.OnMove();
+					animation_back.OnMove();
 				}
 				else {
 					map->OnMove_up();
-					animation4.OnMove();
+					animation_back.OnMove();
 				}
 			}
 			else {
 				if (y == 445) {
-					animation4.OnMove();
+					animation_back.OnMove();
 				}
 				else {
 					y += STEP_SIZE;
-					animation4.OnMove();
+					animation_back.OnMove();
 				}
 			}
 
@@ -256,32 +234,32 @@ namespace game_framework {
 			infrontof1 = 0;
 			back = 0;
 			right = 0;
-			animation.SetTopLeft(x, y);
-			animation.OnShow();
+			animation_left.SetTopLeft(x, y);
+			animation_left.OnShow();
 		}
 		if (isMovingUp) {
 			infrontof1 = 1;
 			left = 0;
 			right = 0;
 			back = 0;
-			animation2.SetTopLeft(x, y);
-			animation2.OnShow();
+			animation_infrontof.SetTopLeft(x, y);
+			animation_infrontof.OnShow();
 		}
 		if (isMovingRight) {
 			infrontof1 = 0;
 			left = 0;
 			right = 1;
 			back = 0;
-			animation3.SetTopLeft(x, y);
-			animation3.OnShow();
+			animation_right.SetTopLeft(x, y);
+			animation_right.OnShow();
 		}
 		if (isMovingDown) {
 			infrontof1 = 0;
 			left = 0;
 			right = 0;
 			back = 1;
-			animation4.SetTopLeft(x, y);
-			animation4.OnShow();
+			animation_back.SetTopLeft(x, y);
+			animation_back.OnShow();
 		}
 	}
 }

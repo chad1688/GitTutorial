@@ -237,34 +237,22 @@ namespace game_framework {
 		//
 		// 移動人物
 		//
-		if (people.GetisMovingup()) {
-			if (people.GetisMovingright()) {
-				if (map.isObject(people.GetX2() + 10, people.GetY2()) && map.isObject(people.GetX2() + 10, people.GetY1())) {
-					people.OnMove();
-				}
-			}
-			else if (people.GetisMovingleft()) {
-				if (map.isObject(people.GetX1() - 1, people.GetY1()) && map.isObject(people.GetX1() - 1, people.GetY2())) {
-					people.OnMove();
-				}
-			}
-			else {
-				if (map.isObject(people.GetX1(), people.GetY1() - 1) && map.isObject(people.GetX2(), people.GetY1() - 1)) {
-					people.OnMove();
-				}
+		if (people.GetisMovingup() && !people.GetisMovingdown() && !people.GetisMovingleft() && !people.GetisMovingright()) {
+			if (map.isObject(people.GetX1(), people.GetY1() - 1) && map.isObject(people.GetX2(), people.GetY1() - 1)) {
+				people.OnMove();
 			}
 		}
-		if (people.GetisMovingright() ) {
+		if (people.GetisMovingright() && !people.GetisMovingdown() && !people.GetisMovingleft() && !people.GetisMovingup()) {
 			if (map.isObject(people.GetX2()+10, people.GetY2())&& map.isObject(people.GetX2()+10, people.GetY1())) {
 				people.OnMove();
 			}
 		}
-		if (people.GetisMovingleft()) {
+		if (people.GetisMovingleft() && !people.GetisMovingdown() && !people.GetisMovingup() && !people.GetisMovingright()) {
 			if (map.isObject(people.GetX1()-1, people.GetY1()) && map.isObject(people.GetX1()-1, people.GetY2())) {
 				people.OnMove();
 			}
 		}
-		if (people.GetisMovingdown() ) {
+		if (people.GetisMovingdown() && !people.GetisMovingup() && !people.GetisMovingleft() && !people.GetisMovingright()) {
 			if (map.isObject(people.GetX2(), people.GetY2()+10) && map.isObject(people.GetX1(), people.GetY2() + 10)) {
 				people.OnMove();
 			}
@@ -304,14 +292,8 @@ namespace game_framework {
 		int i;
 		for (i = 0; i < NUMBALLS; i++)
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
-		people.LoadStartinfrontof();
-		people.LoadStartleft();
-		people.LoadStartback();
-		people.LoadStartright();
-		people.LoadBitmapback();
-		people.LoadBitmapinfrontof();
-		people.LoadBitmapleft();
-		people.LoadBitmapright();
+		people.LoadBitmap();
+		people.LoadAnimation();
 		whiltbackground.LoadBitmap("RES/whilt.bmp");
 		
 		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
