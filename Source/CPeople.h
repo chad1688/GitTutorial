@@ -13,6 +13,10 @@ namespace game_framework {
 		int  GetY1();					// 擦子左上角 y 座標
 		int  GetX2();					// 擦子右下角 x 座標
 		int  GetY2();					// 擦子右下角 y 座標
+		bool GetisMovingup();
+		bool GetisMovingdown();
+		bool GetisMovingright();
+		bool GetisMovingleft();
 		void Getmapaddress(Cmap *m);
 		void Initialize();				// 設定擦子為初始值
 		void LoadStartinfrontof();
@@ -24,7 +28,6 @@ namespace game_framework {
 		void LoadBitmapright();
 		void LoadBitmapback();
 		void OnMove();					// 移動擦子
-		void OnMove(int MW, int MH);
 		void OnShow();					// 將擦子圖形貼到畫面
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動

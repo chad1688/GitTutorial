@@ -42,6 +42,24 @@ namespace game_framework {
 		return y + animation.Height();
 	}
 
+
+
+	bool CPeople::GetisMovingup() {
+		return isMovingUp;
+	}
+
+	bool CPeople::GetisMovingdown() {
+		return isMovingDown;
+	}
+
+	bool CPeople::GetisMovingright() {
+		return isMovingRight;
+	}
+
+	bool CPeople::GetisMovingleft() {
+		return isMovingLeft;
+	}
+
 	void CPeople::Initialize()
 	{
 		const int X_POS = 300;
@@ -122,7 +140,7 @@ namespace game_framework {
 			}
 		}
 		if (isMovingRight) {
-			if (map->x > -855) {
+			if (map->x > -1045) {
 				if (x < 300) {
 					x += STEP_SIZE;
 					animation3.OnMove();
@@ -165,7 +183,7 @@ namespace game_framework {
 			}
 		}
 		if (isMovingDown) {
-			if (map->y > -150) {
+			if (map->y > -610) {
 				if (y < 300) {
 					y += STEP_SIZE;
 					animation4.OnMove();
