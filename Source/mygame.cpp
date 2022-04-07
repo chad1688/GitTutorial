@@ -85,6 +85,7 @@ namespace game_framework {
 		//
 		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 		//
+		
 	}
 
 	void CGameStateInit::OnBeginState()
@@ -225,6 +226,7 @@ namespace game_framework {
 		CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 		CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 		CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+		/*map.init();*/
 	}
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -234,26 +236,35 @@ namespace game_framework {
 		//
 		// SetCursor(AfxGetApp()->LoadCursor(IDC_GAMECURSOR));
 		//
-		// 移動背景圖的座標
 		//
-		if (background.Top() > SIZE_Y)
-			background.SetTopLeft(60, -background.Height());
-		background.SetTopLeft(background.Left(), background.Top() + 1);
+		// 移動人物
 		//
-		// 移動球
-		//
-		int i;
-		for (i = 0; i < NUMBALLS; i++)
-			ball[i].OnMove();
-		//
-		// 移動擦子
-		//
-
-		people.OnMove();
+		if (people.GetisMovingup() && !people.GetisMovingdown() && !people.GetisMovingleft() && !people.GetisMovingright()) {
+			if (map.isObject(people.GetX1(), people.GetY1() - 1) && map.isObject(people.GetX2(), people.GetY1() - 1)) {
+				people.OnMove();
+			}
+		}
+		if (people.GetisMovingright() && !people.GetisMovingdown() && !people.GetisMovingleft() && !people.GetisMovingup()) {
+			if (map.isObject(people.GetX2()+10, people.GetY2())&& map.isObject(people.GetX2()+10, people.GetY1())) {
+				people.OnMove();
+			}
+		}
+		if (people.GetisMovingleft() && !people.GetisMovingdown() && !people.GetisMovingup() && !people.GetisMovingright()) {
+			if (map.isObject(people.GetX1()-1, people.GetY1()) && map.isObject(people.GetX1()-1, people.GetY2())) {
+				people.OnMove();
+			}
+		}
+		if (people.GetisMovingdown() && !people.GetisMovingup() && !people.GetisMovingleft() && !people.GetisMovingright()) {
+			if (map.isObject(people.GetX2(), people.GetY2()+10) && map.isObject(people.GetX1(), people.GetY2() + 10)) {
+				people.OnMove();
+			}
+		}
+		
 
 		//
 		// 判斷擦子是否碰到球
 		//
+		/*int i;
 		for (i = 0; i < NUMBALLS; i++)
 			if (ball[i].IsAlive() && ball[i].HitPeople(&people)) {
 				ball[i].SetIsAlive(false);
@@ -267,6 +278,7 @@ namespace game_framework {
 					CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 					GotoGameState(GAME_STATE_OVER);
 				}
+<<<<<<< HEAD
 			}
 		//
 		// 移動彈跳的球
@@ -293,6 +305,9 @@ namespace game_framework {
 			eneY = eneY;
 		}
 		Enemy.SetTopLeft(eneX, eneY);
+=======
+			}*/
+>>>>>>> 86222ed556870fc193b49998d9930e5d3b41e4d2
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -308,14 +323,8 @@ namespace game_framework {
 		int i;
 		for (i = 0; i < NUMBALLS; i++)
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
-		people.LoadStartinfrontof();
-		people.LoadStartleft();
-		people.LoadStartback();
-		people.LoadStartright();
-		people.LoadBitmapback();
-		people.LoadBitmapinfrontof();
-		people.LoadBitmapleft();
-		people.LoadBitmapright();
+		people.LoadBitmap();
+		people.LoadAnimation();
 		whiltbackground.LoadBitmap("RES/whilt.bmp");
 		Enemy.LoadBitmap("RES/back.bmp");		//敵人圖
 		
@@ -410,12 +419,6 @@ namespace game_framework {
 		//
 		//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 		//
-		background.ShowBitmap();			// 貼上背景圖
-		help.ShowBitmap();					// 貼上說明圖
-		hits_left.ShowBitmap();
-		for (int i = 0; i < NUMBALLS; i++)
-			ball[i].OnShow();				// 貼上第i號球
-		bball.OnShow();						// 貼上彈跳的球
 		whiltbackground.ShowBitmap();
 		map.OnShow();
 		people.OnShow();					// 貼上擦子
