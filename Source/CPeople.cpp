@@ -70,25 +70,25 @@ namespace game_framework {
 	}
 
 	void CPeople::LoadBitmap() {
-		start_infrontof.LoadBitmap("RES/infrontof3.bmp", RGB(184, 184, 184));
-		start_left.LoadBitmap("RES/left3.bmp", RGB(184, 184, 184));
-		start_right.LoadBitmap("RES/right3.bmp", RGB(184, 184, 184));
-		start_back.LoadBitmap("RES/back3.bmp", RGB(184, 184, 184));
+		start_infrontof.LoadBitmap("RES/player01_up01.bmp", RGB(255, 255, 255));
+		start_left.LoadBitmap("RES/player01_left01.bmp", RGB(255, 255, 255));
+		start_right.LoadBitmap("RES/player01_right01.bmp", RGB(255, 255, 255));
+		start_back.LoadBitmap("RES/player01_down01.bmp", RGB(255, 255, 255));
 	}
 
 	void CPeople::LoadAnimation() {
-		animation_left.AddBitmap("RES/left.bmp", RGB(184, 184, 184));
-		animation_left.AddBitmap("RES/left2.bmp", RGB(184, 184, 184));
-		animation_left.AddBitmap("RES/left3.bmp", RGB(184, 184, 184));
-		animation_infrontof.AddBitmap("RES/inforntof.bmp", RGB(184, 184, 184));
-		animation_infrontof.AddBitmap("RES/infrontof2.bmp", RGB(184, 184, 184));
-		animation_infrontof.AddBitmap("RES/infrontof3.bmp", RGB(184, 184, 184));
-		animation_right.AddBitmap("RES/right.bmp", RGB(184, 184, 184));
-		animation_right.AddBitmap("RES/right2.bmp", RGB(184, 184, 184));
-		animation_right.AddBitmap("RES/right3.bmp", RGB(184, 184, 184));
-		animation_back.AddBitmap("RES/back.bmp", RGB(184, 184, 184));
-		animation_back.AddBitmap("RES/back2.bmp", RGB(184, 184, 184));
-		animation_back.AddBitmap("RES/back3.bmp", RGB(184, 184, 184));
+		animation_left.AddBitmap("RES/player01_left02.bmp", RGB(255, 255, 255));
+		animation_left.AddBitmap("RES/player01_left03.bmp", RGB(255, 255, 255));
+		//animation_left.AddBitmap("RES/left3.bmp", RGB(184, 184, 184));
+		animation_infrontof.AddBitmap("RES/player01_up02.bmp", RGB(255, 255, 255));
+		animation_infrontof.AddBitmap("RES/player01_up03.bmp", RGB(255, 255, 255));
+		//animation_infrontof.AddBitmap("RES/infrontof3.bmp", RGB(184, 184, 184));
+		animation_right.AddBitmap("RES/player01_right02.bmp", RGB(255, 255, 255));
+		animation_right.AddBitmap("RES/player01_right03.bmp", RGB(255, 255, 255));
+		//animation_right.AddBitmap("RES/right3.bmp", RGB(184, 184, 184));
+		animation_back.AddBitmap("RES/player01_down02.bmp", RGB(255, 255, 255));
+		animation_back.AddBitmap("RES/player01_down03.bmp", RGB(255, 255, 255));
+		//animation_back.AddBitmap("RES/back3.bmp", RGB(184, 184, 184));
 	}
 
 	void CPeople::shot() {

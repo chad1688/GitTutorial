@@ -104,17 +104,7 @@ IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
-back1                   BITMAP                  "C:\\Users\\xiao\\OneDrive\\桌面\\OOPL\\RES\\back.bmp"
 
-back2                   BITMAP                  "C:\\Users\\xiao\\OneDrive\\桌面\\OOPL\\RES\\back2.bmp"
-
-back3                   BITMAP                  "C:\\Users\\xiao\\OneDrive\\桌面\\OOPL\\RES\\back3.bmp"
-
-infrontof2              BITMAP                  "C:\\Users\\xiao\\OneDrive\\桌面\\OOPL\\RES\\infrontof2.bmp"
-
-infrontof3              BITMAP                  "C:\\Users\\xiao\\OneDrive\\桌面\\OOPL\\RES\\infrontof3.bmp"
-
-IDB_BITMAP3             BITMAP                  "C:\\Users\\xiao\\OneDrive\\桌面\\OOPL\\RES\\left.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

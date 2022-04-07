@@ -18,6 +18,11 @@ namespace game_framework {
 		MW2 = 40;
 	}
 
+	/*void Cmap::LoadBitmap() {
+		this->map.LoadBitmap("./RES/69.bmp",RGB(0,0,0));
+	}*/
+
+
 	void Cmap::LoadBitmap() {
 		this->map.LoadBitmap("./RES/background.bmp",RGB(0,0,0));
 		this->wall .LoadBitmap("./RES/70.bmp", RGB(255, 255, 255));
