@@ -11,25 +11,17 @@
 
 namespace game_framework {
 	Cmap::Cmap( ) {
-<<<<<<< HEAD
-		x = -1045;
-		y = -245;
-	}
-
-	void Cmap::LoadBitmap() {
-		this->map.LoadBitmap("./RES/69.bmp",RGB(0,0,0));
-	}
-
-	void Cmap::OnMove_left() {
-		if(x > -1045)
-			this->x -=5;
-=======
 		x = 0;
 		y = 0;
 		MH = 110;
 		MW = 80;
 		MW2 = 40;
 	}
+
+	/*void Cmap::LoadBitmap() {
+		this->map.LoadBitmap("./RES/69.bmp",RGB(0,0,0));
+	}*/
+
 
 	void Cmap::LoadBitmap() {
 		this->map.LoadBitmap("./RES/background.bmp",RGB(0,0,0));
@@ -50,7 +42,6 @@ namespace game_framework {
 		if (x > -1045) {
 			this->x -= 20;
 		}
->>>>>>> 86222ed556870fc193b49998d9930e5d3b41e4d2
 	}
 
 	void Cmap::OnMove_right() {
@@ -60,11 +51,7 @@ namespace game_framework {
 
 	void Cmap::OnMove_up() {
 		if (y > -610)
-<<<<<<< HEAD
-			this->y -= 5;
-=======
 			this->y -= 20;
->>>>>>> 86222ed556870fc193b49998d9930e5d3b41e4d2
 	}
 
 	void Cmap::OnMove_down() {
