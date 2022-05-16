@@ -242,6 +242,7 @@ namespace game_framework {
 		// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 		//
 		// SetCursor(AfxGetApp()->LoadCursor(IDC_GAMECURSOR));
+		map.OnMove_redbox_address();
 		//
 		//
 		// 移動人物
@@ -291,12 +292,59 @@ namespace game_framework {
 			}
 		}
 		
+		people.people_touch_redbox();
+		arms.add_arms = people.add_arms;
+		for (int i = 0; i < 2; i++)
+			map.redbox_appear3[i] = people.red_box_appear3[i];
+		map.OnMove_redbox_live();
+		for (int i = 0; i < 2; i++)
+			people.red_box_appear3[i] = map.redbox_appear3[i];
+		people.timer++;
 
+		people.blood_OnMove();
+		uzi.isMovingright = people.GetisMovingright();
+		uzi.isMovingleft = people.GetisMovingleft();
+		uzi.isMovingup = people.GetisMovingup();
+		uzi.isMovingdown = people.GetisMovingdown();
+		uzi.infrontof1 = people.infrontof1;
+		uzi.right = people.right;
+		uzi.left = people.left;
+		uzi.back = people.back;
+		uzi.gunx = people.GetX2()-30;
+		uzi.guny = people.GetY1();
+		shot.isMovingright = people.GetisMovingright();
+		shot.isMovingleft = people.GetisMovingleft();
+		shot.isMovingup = people.GetisMovingup();
+		shot.isMovingdown = people.GetisMovingdown();
+		shot.infrontof1 = people.infrontof1;
+		shot.right = people.right;
+		shot.left = people.left;
+		shot.back = people.back;
+		shot.gunx = people.GetX2() - 30;
+		shot.guny = people.GetY1();
+		rocket.isMovingright = people.GetisMovingright();
+		rocket.isMovingleft = people.GetisMovingleft();
+		rocket.isMovingup = people.GetisMovingup();
+		rocket.isMovingdown = people.GetisMovingdown();
+		rocket.infrontof1 = people.infrontof1;
+		rocket.right = people.right;
+		rocket.left = people.left;
+		rocket.back = people.back;
+		rocket.gunx = people.GetX2() - 30;
+		rocket.guny = people.GetY1();
+		arms.OnMove();
+		people.add_arms = arms.add_arms;
+		show_text_x = people.GetX1() + 20;
+		show_text_y = people.GetY1() - 30;
+		show_text_x2 = people.GetX1() + 15;
+		show_text_y2 = people.GetY1() - 30;
+		show_text_x3 = people.GetX1() + 10;
+		show_text_y3 = people.GetY1() - 30;
 		//
 		// 判斷擦子是否碰到球
 		//
 		/*int i;
-		for (i = 0; i < NUMBALLS; i++)
+		for (i = 0; i < NUMBALLS; i++){
 			if (ball[i].IsAlive() && ball[i].HitPeople(&people)) {
 				ball[i].SetIsAlive(false);
 				CAudio::Instance()->Play(AUDIO_DING);
@@ -317,7 +365,7 @@ namespace game_framework {
 		bball.OnMove();*/
 
 		//設定敵人跟隨腳色
-		if (eneX < (people.GetX1()+1)) {
+		/*if (eneX < (people.GetX1()+1)) {
 			eneX += 1;
 		}
 		else if (eneX > (people.GetX1() + 1)){
@@ -335,7 +383,7 @@ namespace game_framework {
 		else {
 			eneY = eneY;
 		}
-		Enemy.SetTopLeft(eneX, eneY);
+		Enemy.SetTopLeft(eneX, eneY);*/
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -353,6 +401,9 @@ namespace game_framework {
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
 		people.LoadBitmap();
 		people.LoadAnimation();
+		shot.LoadBitmap();
+		uzi.LoadBitmap();
+		rocket.LoadBitmap();
 		whiltbackground.LoadBitmap("RES/whilt.bmp");
 		Enemy.LoadBitmap("RES/back.bmp");		//敵人圖
 		
@@ -378,6 +429,12 @@ namespace game_framework {
 		//
 		map.LoadBitmap();
 		people.Getmapaddress(&map);
+		shot.Getmapaddress(&map);
+		uzi.Getmapaddress(&map);
+		rocket.Getmapaddress(&map);
+		arms.GetShotAddress(&shot);
+		arms.GetUziAddress(&uzi);
+		arms.GetRocketAddress(&rocket);
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -386,6 +443,7 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char KEY_SPACE = ' ';//keyboard空白建
 		if (nChar == KEY_LEFT)
 			people.SetMovingLeft(true);
 		if (nChar == KEY_RIGHT)
@@ -394,6 +452,11 @@ namespace game_framework {
 			people.SetMovingUp(true);
 		if (nChar == KEY_DOWN)
 			people.SetMovingDown(true);
+		if (nChar == KEY_SPACE) {
+			uzi.Setspace(true);
+			shot.Setspace(true);
+			rocket.Setspace(true);
+		}
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -402,6 +465,7 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char KEY_SPACE = ' ';//keyboard空白建
 		if (nChar == KEY_LEFT)
 			people.SetMovingLeft(false);
 		if (nChar == KEY_RIGHT)
@@ -410,16 +474,23 @@ namespace game_framework {
 			people.SetMovingUp(false);
 		if (nChar == KEY_DOWN)
 			people.SetMovingDown(false);
+		if (nChar == KEY_SPACE) {
+			uzi.Setspace(false);
+			shot.Setspace(false);
+			rocket.Setspace(false);
+		}
 	}
 
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		people.SetMovingLeft(true);
+		arms.change_arms = true;
+		//people.SetMovingLeft(true);
 	}
 
 	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		people.SetMovingLeft(false);
+		arms.change_arms = false;
+		//people.SetMovingLeft(false);
 	}
 
 	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -429,12 +500,12 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		people.SetMovingRight(true);
+		people.Setmonser_touch(true);
 	}
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		people.SetMovingRight(false);
+		people.Setmonser_touch(false);
 	}
 
 	void CGameStateRun::OnShow()
@@ -449,7 +520,74 @@ namespace game_framework {
 		//
 		whiltbackground.ShowBitmap();
 		map.OnShow();
+		//people.shot_OnShow();
+		arms.OnShow();
 		people.OnShow();					// 貼上擦子
+		if (arms.now_arms == 0) {
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(100, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(255, 255, 255));
+			pDC->SetTextColor(RGB(0, 0, 0));
+			char str[80];								// Demo 數字對字串的轉換
+			sprintf(str, "Pistol");
+			pDC->TextOut(show_text_x, show_text_y, str);
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		}
+		if (arms.now_arms == 1) {
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(100, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(255, 255, 255));
+			pDC->SetTextColor(RGB(0, 0, 0));
+			char str[80];								// Demo 數字對字串的轉換
+			sprintf(str, "UZI:%d",100 - uzi.bullet);
+			pDC->TextOut(show_text_x2, show_text_y2, str);
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		}
+		if (arms.now_arms == 2) {
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(100, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(255, 255, 255));
+			pDC->SetTextColor(RGB(0, 0, 0));
+			char str[80];								// Demo 數字對字串的轉換
+			sprintf(str, "Rocket:%d", 40 - rocket.bullet);
+			pDC->TextOut(show_text_x3, show_text_y3, str);
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		}
+		if (arms.r == 1 && arms.show_text == 1) {
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(255, 255, 255));
+			pDC->SetTextColor(RGB(0, 0, 0));
+			char str[80];								// Demo 數字對字串的轉換
+			sprintf(str, "Picked up UZI");
+			pDC->TextOut(240, 400, str);
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		}
+		if (arms.r == 2 && arms.show_text == 1) {
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(255, 255, 255));
+			pDC->SetTextColor(RGB(0, 0, 0));
+			char str[80];								// Demo 數字對字串的轉換
+			sprintf(str, "Picked up Rocket");
+			pDC->TextOut(240, 400, str);
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		}
 		//
 		//  貼上左上及右下角落的圖
 		//
@@ -457,6 +595,6 @@ namespace game_framework {
 		corner.ShowBitmap();
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
-		Enemy.ShowBitmap();		//展現敵人
+		//Enemy.ShowBitmap();		//展現敵人
 	}
 }

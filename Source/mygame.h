@@ -42,7 +42,10 @@
 #include "CBall.h"
 #include "CBouncingBall.h"
 #include "map.h"
-
+#include "Shot.h"
+#include "Arms.h"
+#include "Uzi.h"
+#include "Rocket.h"
 namespace game_framework {
 	///////////////////////////////s//////////////////////////////////////////////
 	// Constants
@@ -106,9 +109,18 @@ namespace game_framework {
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
 		Cmap			map;
+		Cshot			shot;
+		CArms			arms;
+		Cuzi            uzi;
+		CRocket			rocket;
 		CMovingBitmap	Enemy;		//敵人
 		int				eneX, eneY;
-
+		int show_text_x;
+		int show_text_y;
+		int show_text_x2;
+		int show_text_y2;
+		int show_text_x3;
+		int show_text_y3;
 		int test = 0;
 
 	};

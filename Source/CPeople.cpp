@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Resource.h"
+#include <string>
 #include <mmsystem.h>
 #include <ddraw.h>
 #include "audio.h"
@@ -17,9 +18,9 @@ namespace game_framework {
 		Initialize();
 	}
 
-	void CPeople::Getmapaddress(Cmap *m) {
+	void CPeople::Getmapaddress(Cmap *m) 
+	{
 		map = m;
-		
 	}
 
 	int CPeople::GetX1()
@@ -66,7 +67,13 @@ namespace game_framework {
 		const int Y_POS = 300;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = is_space = false;
+		blood_index = 0;
+		monster_touch = false;
+		count = 0;
+		for (int i = 0; i < 2; i++)
+			red_box_appear3[i] = 0;
+		add_arms = 0;
 	}
 
 	void CPeople::LoadBitmap() {
@@ -74,31 +81,98 @@ namespace game_framework {
 		start_left.LoadBitmap("RES/player01_left01.bmp", RGB(255, 255, 255));
 		start_right.LoadBitmap("RES/player01_right01.bmp", RGB(255, 255, 255));
 		start_back.LoadBitmap("RES/player01_down01.bmp", RGB(255, 255, 255));
+		for (int i = 38; i < 41; i++) {
+			char *change;
+			std::string temp_string = "RES/" + to_string(i) + ".bmp";
+			change = &temp_string[0];
+			blood[i-38].LoadBitmap(change, RGB(255, 255, 255));
+		}
 	}
 
 	void CPeople::LoadAnimation() {
 		animation_left.AddBitmap("RES/player01_left02.bmp", RGB(255, 255, 255));
 		animation_left.AddBitmap("RES/player01_left03.bmp", RGB(255, 255, 255));
-		//animation_left.AddBitmap("RES/left3.bmp", RGB(184, 184, 184));
 		animation_infrontof.AddBitmap("RES/player01_up02.bmp", RGB(255, 255, 255));
 		animation_infrontof.AddBitmap("RES/player01_up03.bmp", RGB(255, 255, 255));
-		//animation_infrontof.AddBitmap("RES/infrontof3.bmp", RGB(184, 184, 184));
 		animation_right.AddBitmap("RES/player01_right02.bmp", RGB(255, 255, 255));
 		animation_right.AddBitmap("RES/player01_right03.bmp", RGB(255, 255, 255));
-		//animation_right.AddBitmap("RES/right3.bmp", RGB(184, 184, 184));
 		animation_back.AddBitmap("RES/player01_down02.bmp", RGB(255, 255, 255));
 		animation_back.AddBitmap("RES/player01_down03.bmp", RGB(255, 255, 255));
 		//animation_back.AddBitmap("RES/back3.bmp", RGB(184, 184, 184));
 	}
 
-	void CPeople::shot() {
+	void CPeople::blood_OnMove()
+	{
+		if (monster_touch) {
+			count++;
+			timer = 0;
+			if (count > 2) {
+				if (blood_index < 2)
+					blood_index += 1;
+				count = 0;
+			}
+		}
+		else {
+			if ((timer % 150) == 0 || (timer % 180) == 0) {
+				if(blood_index>0)
+					blood_index -= 1;
+			}
+		}
+		blood[blood_index].SetTopLeft(x+10, y - 9);
+	}
 
+	void CPeople::people_touch_redbox() 
+	{
+		for (int i = 0; i < 2; i++) {
+			if ((-map->x) + x >= map->redbox_x[i] && (-map->x) + x <= map->redbox_x[i] + 35 && (-map->y) + y >= map->redbox_y[i] && (-map->y) + y <= map->redbox_y[i] + 33) {
+				if(red_box_appear3[i] == 0)
+					add_arms = 1;
+				red_box_appear3[i] = 1;
+			}
+			else if ((-map->x) + x + animation_left.Width() >= map->redbox_x[i] && (-map->x) + x + animation_left.Width() <= map->redbox_x[i] + 35 && (-map->y) + y >= map->redbox_y[i] && (-map->y) + y <= map->redbox_y[i] + 33) {
+				if (red_box_appear3[i] == 0)
+					add_arms = 1;
+				red_box_appear3[i] = 1;
+				
+			}
+			else if ((-map->x) + x >= map->redbox_x[i] && (-map->x) + x <= map->redbox_x[i] + 35 && (-map->y) + y + animation_left.Height() >= map->redbox_y[i] && (-map->y) + y + animation_left.Height() <= map->redbox_y[i] + 33) {
+				if (red_box_appear3[i] == 0)
+					add_arms = 1;
+				red_box_appear3[i] = 1;
+			}
+			else if ((-map->x) + x + animation_left.Width() >= map->redbox_x[i] && (-map->x) + x + animation_left.Width() <= map->redbox_x[i] + 35 && (-map->y) + y + animation_left.Height() >= map->redbox_y[i] && (-map->y) + y + animation_left.Height() <= map->redbox_y[i] + 33) {
+				if (red_box_appear3[i] == 0)
+					add_arms = 1;
+				red_box_appear3[i] = 1;
+				
+			}
+			else if ((-map->x) + x + animation_left.Width() >= map->redbox_x[i] && (-map->x) + x + animation_left.Width() <= map->redbox_x[i] + 35 && (-map->y) + ((y + animation_left.Height() + y)/2) >= map->redbox_y[i] && (-map->y) + ((y + animation_left.Height() + y)/2) <= map->redbox_y[i] + 33) {
+				if (red_box_appear3[i] == 0)
+					add_arms = 1;
+				red_box_appear3[i] = 1;
+			}
+			else if ((-map->x) + x >= map->redbox_x[i] && (-map->x) + x <= map->redbox_x[i] + 35 && (-map->y) + ((y + animation_left.Height() + y) / 2) >= map->redbox_y[i] && (-map->y) + ((y + animation_left.Height() + y) / 2) <= map->redbox_y[i] + 33) {
+				if (red_box_appear3[i] == 0)
+					add_arms = 1;
+				red_box_appear3[i] = 1;
+			}
+			else if ((-map->x) + ((x + animation_left.Width() + x) / 2) >= map->redbox_x[i] && (-map->x) + ((x + animation_left.Width() + x) / 2) <= map->redbox_x[i] + 35 && (-map->y) + y >= map->redbox_y[i] && (-map->y) + y <= map->redbox_y[i] + 33) {
+				if (red_box_appear3[i] == 0)
+					add_arms = 1;
+				red_box_appear3[i] = 1;
+			}
+			else if ((-map->x) + ((x + animation_left.Width() + x) / 2) >= map->redbox_x[i] && (-map->x) + ((x + animation_left.Width() + x) / 2) <= map->redbox_x[i] + 35 && (-map->y) + y + animation_left.Height() >= map->redbox_y[i] && (-map->y) + y + animation_left.Height() <= map->redbox_y[i] + 33) {
+				if (red_box_appear3[i] == 0)
+					add_arms = 1;
+				red_box_appear3[i] = 1;
+			}
+		}
 	}
 
 	void CPeople::OnMove()
 	{
 		const int STEP_SIZE = 5;
-		
+		//TRACE("%d", (-map->x) + x);
 		if (isMovingLeft) {
 			if (map->x < 0) {
 				if (x > 300) {
@@ -209,10 +283,16 @@ namespace game_framework {
 	{
 		isMovingUp = flag;
 	}
+	
 
 	void CPeople::SetXY(int nx, int ny)
 	{
 		x = nx; y = ny;
+	}
+
+	void CPeople::Setmonser_touch(bool flag)
+	{
+		monster_touch = flag;
 	}
 
 	void CPeople::OnShow()
@@ -265,5 +345,6 @@ namespace game_framework {
 			animation_back.SetTopLeft(x, y);
 			animation_back.OnShow();
 		}
+		blood[blood_index].ShowBitmap();
 	}
 }

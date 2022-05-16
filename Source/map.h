@@ -18,26 +18,36 @@ namespace game_framework {
 		void OnMove_right();
 		void OnMove_up();
 		void OnMove_down();
+		void OnMove_redbox_address();
+		void OnMove_redbox_live();
 		void OnShow();
 		bool isObject(int people_x,int people_y);
+		int redbox_appear3[2];
+		int redbox_x[2];
+		int redbox_y[2];
+		int count_red_box3[2];
+		int temp3[2];
 		int x, y;
+		int MH, MW, MW2;
 	protected:
 		CMovingBitmap map;
 		CMovingBitmap wall;
 		CMovingBitmap wall2;
 		CMovingBitmap wall3;
 		CMovingBitmap wall4;
-		int all_map[10][22] = { {3, 2, 2, 1, 2, 2, 1, 2, 2, 1, 0, 0, 1, 2, 2, 1, 2, 2, 1, 2, 2, 4},
+		CMovingBitmap new_gun[2];
+		int gun_index,wall1_index,wall2_index,wall3_index,wall4_index;
+		int all_map[10][22] = { {4, 3, 3, 2, 3, 3, 2, 3, 3, 2, 0, 0, 2, 3, 3, 2, 3, 3, 2, 3, 3, 5},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0},
 								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-								{3, 2, 2, 1, 2, 2, 1, 2, 2, 1, 0, 0, 1, 2, 2, 1, 2, 2, 1, 2, 2, 4} };
-		int MH,MW,MW2;
+								{4, 3, 3, 2, 3, 3, 2, 3, 3, 2, 0, 0, 2, 3, 3, 2, 3, 3, 2, 3, 3, 5} };
+		
 	};
 #endif // !MAP_H
 }
