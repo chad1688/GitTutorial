@@ -38,6 +38,11 @@ namespace game_framework {
 		int boomx;
 		int boomy;
 		bool is_space;
+		bool right_isobject;
+		bool left_isobject;
+		bool up_isobject;
+		bool down_isobject;
+		int stop;
 	protected:
 		CMovingBitmap shot_infrontof[100];
 		CMovingBitmap shot_left[100];

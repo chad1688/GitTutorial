@@ -60,6 +60,7 @@
 #include "mygame.h"
 
 
+
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -393,7 +394,7 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
-		
+		score.score = s->score;
 	}
 
 	void CGameStateOver::OnBeginState()
@@ -437,22 +438,17 @@ namespace game_framework {
 		retry.LoadBitmap("RES/retry.bmp", RGB(255, 255, 255));
 		menu.LoadBitmap("RES/menu.bmp", RGB(255, 255, 255));
 		win.LoadBitmap("RES/win.bmp", RGB(255, 255, 255));
+		score.LoadBitmap();
 	}
 
 	void CGameStateOver::OnShow()
 	{
-		if (s->special == true)
-		{
-			win.ShowBitmap();
-		}
-		else
-		{
-			lose.ShowBitmap();
-		}
+		win.ShowBitmap();
 		retry.SetTopLeft(100, 375);
 		retry.ShowBitmap();
 		menu.SetTopLeft(400, 375);
 		menu.ShowBitmap();
+		score.Over_Onshow();
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -460,9 +456,8 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMBALLS(28)
+		: CGameState(g)
 	{
-		ball = new CBall[NUMBALLS];
 		eneX = eneY = 0;
 		map.choose_map = s->choose_map;
 		people.choose_map = s->choose_map;
@@ -471,7 +466,7 @@ namespace game_framework {
 
 	CGameStateRun::~CGameStateRun()
 	{
-		delete[] ball;
+
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -499,6 +494,7 @@ namespace game_framework {
 		people.die = false;
 		s->special = false;
 		s->special2 = false;
+		enemy.score = 0;
 		count2 = 0;
 		CAudio::Instance()->Play(AUDIO_END);
 	}
@@ -520,33 +516,48 @@ namespace game_framework {
 			if (people.GetisMovingup() && !people.GetisMovingdown() && !people.GetisMovingleft() && !people.GetisMovingright()) {
 				if (map.isObject(people.GetX1(), people.GetY1() - 1) && map.isObject(people.GetX2(), people.GetY1() - 1)) {
 					people.OnMove();
+					rocket.up_isobject = false;
 					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
+				}
+				else
+				{
+					rocket.up_isobject = true;
 				}
 			}
 			if (people.GetisMovingright() && !people.GetisMovingdown() && !people.GetisMovingleft() && !people.GetisMovingup()) {
 				if (map.isObject(people.GetX2() + 10, people.GetY2()) && map.isObject(people.GetX2() + 10, people.GetY1())) {
 					people.OnMove();
+					rocket.right_isobject = false;
 					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
+				}
+				else
+				{
+					rocket.right_isobject = true;
 				}
 			}
 			if (people.GetisMovingleft() && !people.GetisMovingdown() && !people.GetisMovingup() && !people.GetisMovingright()) {
 				if (map.isObject(people.GetX1() - 1, people.GetY1()) && map.isObject(people.GetX1() - 1, people.GetY2())) {
 					people.OnMove();
+					rocket.left_isobject = false;
 					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
+				}
+				else
+				{
+					rocket.left_isobject = true;
 				}
 			}
 			if (people.GetisMovingdown() && !people.GetisMovingup() && !people.GetisMovingleft() && !people.GetisMovingright()) {
 				if (map.isObject(people.GetX2(), people.GetY2() + 10) && map.isObject(people.GetX1(), people.GetY2() + 10)) {
 					people.OnMove();
+					rocket.down_isobject = false;
 					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
 				}
-			}
-			if (people.GetisMovingup() && !people.GetisMovingdown() && people.GetisMovingleft() && !people.GetisMovingright()) {
-				if (map.isObject(people.GetX1(), people.GetY1() - 1) && map.isObject(people.GetX2(), people.GetY1() - 1) && map.isObject(people.GetX1() - 1, people.GetY1()) && map.isObject(people.GetX1() - 1, people.GetY2())) {
-					people.OnMove();
-					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
+				else
+				{
+					rocket.down_isobject = true;
 				}
 			}
+			rocket.stop = people.stop;
 			people.people_touch_redbox();
 			if (people.pickup == true)
 			{
@@ -575,6 +586,7 @@ namespace game_framework {
 		}
 		if (die_count >= 90 && music_stop4 == 2)
 		{
+			s->score = enemy.score;
 			GotoGameState(GAME_STATE_OVER);
 		}
 		uzi.isMovingright = people.GetisMovingright();
@@ -699,7 +711,7 @@ namespace game_framework {
 		}
 		else if (level == 3)
 		{
-			if (enemy.large < 30 && count >= 30)
+			if (enemy.large < 30 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -707,7 +719,7 @@ namespace game_framework {
 		}
 		else if (level == 4)
 		{
-			if (enemy.large < 40 && count >= 30)
+			if (enemy.large < 40 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -715,7 +727,7 @@ namespace game_framework {
 		}
 		else if (level == 5)
 		{
-			if (enemy.large < 50 && count >= 30)
+			if (enemy.large < 50 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -723,7 +735,7 @@ namespace game_framework {
 		}
 		else if (level == 6)
 		{
-			if (enemy.large < 60 && count >= 30)
+			if (enemy.large < 60 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -731,7 +743,7 @@ namespace game_framework {
 		}
 		else if (level == 7)
 		{
-			if (enemy.large < 70 && count >= 30)
+			if (enemy.large < 70 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -739,7 +751,7 @@ namespace game_framework {
 		}
 		else if (level == 8)
 		{
-			if (enemy.large < 80 && count >= 30)
+			if (enemy.large < 80 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -747,7 +759,7 @@ namespace game_framework {
 		}
 		else if (level == 9)
 		{
-			if (enemy.large < 90 && count >= 15)
+			if (enemy.large < 90 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -755,7 +767,7 @@ namespace game_framework {
 		}
 		else if (level == 10)
 		{
-			if (enemy.large < 100 && count >= 15 && (s->special == false || s->special2 == false))
+			if (enemy.large < 100 && count >= 45 && (s->special == false || s->special2 == false))
 			{
 				enemy.born();
 				count = 0;
@@ -764,6 +776,7 @@ namespace game_framework {
 		else if (level == 11)
 		{
 			s->special = true;
+			s->score = enemy.score;
 			GotoGameState(GAME_STATE_OVER);
 		}
 		
@@ -773,6 +786,8 @@ namespace game_framework {
 			for (int i = 0; i < 100; i++)
 			{
 				enemy.blood[i] = 0;
+				enemy.enemy_x[i] = 1800;
+				enemy.enemy_y[i] = 1800;
 			}
 		}
 
@@ -780,6 +795,8 @@ namespace game_framework {
 		{
 			total_blood += enemy.blood[i];
 		}
+
+		
 
 		for (int i = 0; i < enemy.large; i++)
 		{
@@ -799,9 +816,12 @@ namespace game_framework {
 			}
 		}
 
+		enemy.blood_on_move();
+		score.score = enemy.score;
+		score.OnMove();
+
 		if (total_blood > 0 && enemy.large > 0)
 		{
-			enemy.blood_on_move();
 			enemy.On_Move();
 			people.hit_OnMove();
 			people.large = enemy.large;
@@ -812,12 +832,14 @@ namespace game_framework {
 			for (int i = 0; i < enemy.large; i++)
 			{
 				enemy.shoted[i] = 0;
+				enemy.enemy_die[i] = 0; 
 			}
 			count2 = 0;
 		}
 		else if (s->special == true && s->special2 == true)
 		{
 			enemy.large = 1;
+			enemy.score = 4500;
 		}
 
 		if (count2 == 180)
@@ -849,9 +871,6 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		int i;
-		for (i = 0; i < NUMBALLS; i++)
-			ball[i].LoadBitmap();								// 載入第i個球的圖形
 		people.LoadBitmap();
 		people.LoadAnimation();
 		shot.LoadBitmap();
@@ -869,12 +888,8 @@ namespace game_framework {
 		//
 		// 繼續載入其他資料
 		//
-		help.LoadBitmap(IDB_HELP, RGB(255, 255, 255));				// 載入說明的圖形
-		corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
-		corner.ShowBitmap(background);							// 將corner貼到background
-		bball.LoadBitmap();										// 載入圖形
-		hits_left.LoadBitmap();
 		map.LoadBitmap();
+		score.LoadBitmap();
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 		CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
@@ -886,6 +901,7 @@ namespace game_framework {
 		CAudio::Instance()->Load(AUDIO_ZOMBIE_HIT, "sounds\\Zombie.Hit.mp3");
 		CAudio::Instance()->Load(AUDIO_EXPLOSION, "sounds\\Explosion.mp3");
 		CAudio::Instance()->Load(AUDIO_DIE, "sounds\\die.mp3");
+		
 		//CAudio::Instance()->Load(AUDIO_END, "sounds\\World.End.mp3");
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
@@ -1011,8 +1027,6 @@ namespace game_framework {
 		{
 			total_object += object_appear[i];
 		}
-
-		TRACE("%d", total_object);
 
 		int total_temp = 0;
 		for (int i = 0; i < 3; i++)
@@ -1173,10 +1187,7 @@ namespace game_framework {
 		//
 		//  貼上左上及右下角落的圖
 		//
-		corner.SetTopLeft(0, 0);
-		corner.ShowBitmap();
-		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
-		corner.ShowBitmap();
 		enemy.On_Show();
+		score.OnShow();
 	}
 }

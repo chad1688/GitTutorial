@@ -640,7 +640,7 @@ namespace game_framework {
 				start_back.SetTopLeft(x, y);
 				start_back.ShowBitmap();
 			}
-			if (isMovingLeft&& hit == 0) {
+			if (isMovingLeft && isMovingRight == false && isMovingDown == false && hit == 0) {
 				left = 1;
 				infrontof1 = 0;
 				back = 0;
@@ -648,7 +648,7 @@ namespace game_framework {
 				animation_left.SetTopLeft(x, y);
 				animation_left.OnShow();
 			}
-			if (isMovingUp&& hit == 0) {
+			if (isMovingUp && isMovingLeft == false && isMovingRight == false && hit == 0) {
 				infrontof1 = 1;
 				left = 0;
 				right = 0;
@@ -656,7 +656,7 @@ namespace game_framework {
 				animation_infrontof.SetTopLeft(x, y);
 				animation_infrontof.OnShow();
 			}
-			if (isMovingRight&& hit == 0) {
+			if (isMovingRight && isMovingLeft == false && isMovingDown == false && hit == 0) {
 				infrontof1 = 0;
 				left = 0;
 				right = 1;
@@ -664,7 +664,7 @@ namespace game_framework {
 				animation_right.SetTopLeft(x, y);
 				animation_right.OnShow();
 			}
-			if (isMovingDown&& hit == 0) {
+			if (isMovingDown && isMovingUp == false && isMovingLeft == false && isMovingRight == false && hit == 0) {
 				infrontof1 = 0;
 				left = 0;
 				right = 0;

@@ -258,8 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\audio.cpp" />
-    <ClCompile Include="Source\CBall.cpp" />
-    <ClCompile Include="Source\CBouncingBall.cpp" />
     <ClCompile Include="Source\CPeople.cpp" />
     <ClCompile Include="Source\enemy.cpp" />
     <ClCompile Include="Source\game.cpp">
@@ -286,6 +284,7 @@
     <ClCompile Include="Source\mygame.cpp" />
     <ClCompile Include="Source\Arms.cpp" />
     <ClCompile Include="Source\Rocket.cpp" />
+    <ClCompile Include="Source\Score.cpp" />
     <ClCompile Include="Source\Shot.cpp" />
     <ClCompile Include="Source\StdAfx.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -306,8 +305,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
-    <ClInclude Include="Source\CBall.h" />
-    <ClInclude Include="Source\CBouncingBall.h" />
     <ClInclude Include="Source\CPeople.h" />
     <ClInclude Include="Source\enemy.h" />
     <ClInclude Include="Source\game.h" />
@@ -318,6 +315,7 @@
     <ClInclude Include="Source\Arms.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\Rocket.h" />
+    <ClInclude Include="Source\Score.h" />
     <ClInclude Include="Source\Shot.h" />
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />

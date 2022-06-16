@@ -97,7 +97,7 @@ namespace game_framework {
 	}
 
 	void CRocket::shot_OnMove2() {
-		if (isMovingright && isMovingleft == false && isMovingup == false && isMovingdown == false && map->isObject(gunx_down + 70,gunx_left) && map->isObject(gunx_down + 70, gunx_left + 60)) {
+		if (isMovingright && isMovingleft == false && isMovingup == false && isMovingdown == false && right_isobject == false && stop == 0) {
 			if (gunx_up == 330 || gunx_down == 300 || gunx_right == 330 || gunx_left == 300) {
 				for (int i = 0; i < 40; i++) {
 					if (temp_bullet[i] != 0 || temp_infrontof[i] != 0 || temp_back[i] != 0 || temp_left[i] != 0) {
@@ -110,7 +110,7 @@ namespace game_framework {
 				boomx -= 10;
 			}
 		}
-		if (isMovingleft && isMovingright == false && isMovingup == false && isMovingdown == false && map->isObject(gunx_down - 1, gunx_left) && map->isObject(gunx_down - 1, gunx_left + 60)) {
+		if (isMovingleft && isMovingright == false && isMovingup == false && isMovingdown == false && left_isobject == false && stop == 0) {
 			if (gunx_up == 330 || gunx_down == 300 || gunx_right == 330 || gunx_left == 300) {
 				for (int i = 0; i < 40; i++) {
 					if (temp_bullet[i] != 0 || temp_infrontof[i] != 0 || temp_back[i] != 0 || temp_right[i] != 0) {
@@ -123,7 +123,7 @@ namespace game_framework {
 				boomx += 10;
 			}
 		}
-		if (isMovingup && isMovingright == false && isMovingleft == false && isMovingdown == false && map->isObject(gunx_down , gunx_left - 1) && map->isObject(gunx_down + 60, gunx_left - 1)) {
+		if (isMovingup && isMovingright == false && isMovingleft == false && isMovingdown == false && up_isobject == false && stop == 0) {
 			if (guny_up == 300 || guny_down == 330 || guny_right == 330 || guny_left == 330) {
 				for (int i = 0; i < 40; i++) {
 					if (temp_right[i] != 0 || temp_left[i] != 0 || temp_back[i] != 0) {
@@ -136,7 +136,7 @@ namespace game_framework {
 				boomy += 10;
 			}
 		}
-		if (isMovingdown && isMovingright == false && isMovingup == false && isMovingleft == false && map->isObject(gunx_down , gunx_left + 61) && map->isObject(gunx_down + 60, gunx_left + 61)) {
+		if (isMovingdown && isMovingright == false && isMovingup == false && isMovingleft == false && down_isobject == false && stop == 0) {
 			if (guny_up == 300 || guny_down == 330 || guny_right == 330 || guny_left == 330) {
 				for (int i = 0; i < 40; i++) {
 					if (temp_right[i] != 0 || temp_left[i] != 0 || temp_infrontof[i] != 0) {

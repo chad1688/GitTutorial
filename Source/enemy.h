@@ -48,10 +48,12 @@ namespace game_framework {
 		int is_enemy[100];
 		int is_enemy2[100];
 		int touch_enemy_address[100];
+		int enemy_die[100];
 		int temp;
 		int temp2;
 		int choose_map;
 		int count_hit;
+		int score;
 	protected:
 		CAnimation animation_left;	
 		CAnimation animation_infrontof;

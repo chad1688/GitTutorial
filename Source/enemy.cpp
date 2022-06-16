@@ -18,6 +18,8 @@ namespace game_framework {
 	Cenemy::Cenemy() {
 		large = 0;
 		temp = 0;
+		temp2 = 0;
+		score = 0;
 		for (int i = 0; i < 100; i++)
 		{
 			right[i] = left[i] = back[i] = up[i] = 0;
@@ -37,7 +39,7 @@ namespace game_framework {
 			attack_left[i] = 0;
 			attack_right[i] = 0;
 			touch_enemy_address[i] = 0;
-			temp2 = 0;
+			enemy_die[i] = 0;
 		}
 	}
 
@@ -109,10 +111,6 @@ namespace game_framework {
 				change = &temp_string4[0];
 				animation_left_attack[i].AddBitmap(change, RGB(255, 255, 255));
 			}
-			/*animation_back_attack->SetDelayCount(0.68);
-			animation_left_attack->SetDelayCount(0.68);
-			animation_right_attack->SetDelayCount(0.68);
-			animation_up_attack->SetDelayCount(0.68);*/
 		}
 	}
 
@@ -126,17 +124,22 @@ namespace game_framework {
 					if (is_enemy2[i] == 0)
 					{
 						temp_x = enemy_x[i] + 20;
-						if (temp_x < 1650 && map->isObject(map->x + enemy_x[i] + 60 + 5, map->y + enemy_y[i] + 60) && map->isObject(map->x + enemy_x[i] + 60 + 5, map->y + enemy_y[i]))
+						if (temp_x < 1600 && map->isObject(map->x + enemy_x[i] + 60 + 5, map->y + enemy_y[i] + 60) && map->isObject(map->x + enemy_x[i] + 60 + 5, map->y + enemy_y[i]))
 						{
 							enemy_x[i] += 20;
 						}
-						else if (temp_x >= 1650)
+						else if (temp_x >= 1600)
 						{
-							enemy_x[i] = 1650;
+							enemy_x[i] = 1600;
 						}
 					}
 					shoted[i] = 1;
 					blood[i] -= 10;
+					if (enemy_die[i] == 0 && blood[i] <= 0)
+					{
+						score += 10;
+						enemy_die[i] = 1;
+					}
 					count[i] = 0;
 					shot->shot_stop = 1;
 				}
@@ -154,6 +157,11 @@ namespace game_framework {
 						}
 					}
 					blood[i] -= 10;
+					if (enemy_die[i] == 0 && blood[i] <= 0)
+					{
+						score += 10;
+						enemy_die[i] = 1;
+					}
 					count[i] = 0;
 					shoted[i] = 2;
 					shot->shot_stop = 1;
@@ -172,6 +180,11 @@ namespace game_framework {
 						}
 					}
 					blood[i] -= 10;
+					if (enemy_die[i] == 0 && blood[i] <= 0)
+					{
+						score += 10;
+						enemy_die[i] = 1;
+					}
 					count[i] = 0;
 					shoted[i] = 3;
 					shot->shot_stop = 1;
@@ -190,6 +203,11 @@ namespace game_framework {
 						}
 					}
 					blood[i] -= 10;
+					if (enemy_die[i] == 0 && blood[i] <= 0)
+					{
+						score += 10;
+						enemy_die[i] = 1;
+					}
 					count[i] = 0;
 					shoted[i] = 4;
 					shot->shot_stop = 1;
@@ -206,16 +224,21 @@ namespace game_framework {
 						if (is_enemy2[j] == 0)
 						{
 							temp_x = enemy_x[j] + 20;
-							if (temp_x < 1650 && map->isObject(map->x + enemy_x[j] + 60 + 5, map->y + enemy_y[j] + 60) && map->isObject(map->x + enemy_x[j] + 60 + 5, map->y + enemy_y[j]))
+							if (temp_x < 1600 && map->isObject(map->x + enemy_x[j] + 60 + 5, map->y + enemy_y[j] + 60) && map->isObject(map->x + enemy_x[j] + 60 + 5, map->y + enemy_y[j]))
 							{
 								enemy_x[j] += 20;
 							}
-							else if(temp_x >= 1650)
+							else if(temp_x >= 1600)
 							{
-								enemy_x[j] = 1650;
+								enemy_x[j] = 1600;
 							}
 						}
 						blood[j] -= 10;
+						if (enemy_die[j] == 0 && blood[j] <= 0)
+						{
+							score += 10;
+							enemy_die[j] = 1;
+						}
 						count[j] = 0;
 						shoted[j] = 1;
 						uzi->shot_stop[i] = 1;
@@ -234,6 +257,11 @@ namespace game_framework {
 							}
 						}
 						blood[j] -= 10;
+						if (enemy_die[j] == 0 && blood[j] <= 0)
+						{
+							score += 10;
+							enemy_die[j] = 1;
+						}
 						count[j] = 0;
 						shoted[j] = 2;
 						uzi->shot_stop[i] = 1;
@@ -252,6 +280,11 @@ namespace game_framework {
 							}
 						}
 						blood[j] -= 10;
+						if (enemy_die[j] == 0 && blood[j] <= 0)
+						{
+							score += 10;
+							enemy_die[j] = 1;
+						}
 						count[j] = 0;
 						shoted[j] = 3;
 						uzi->shot_stop[i] = 1;
@@ -270,6 +303,11 @@ namespace game_framework {
 							}
 						}
 						blood[j] -= 10;
+						if (enemy_die[j] == 0 && blood[j] <= 0)
+						{
+							score += 10;
+							enemy_die[j] = 1;
+						}
 						count[j] = 0;
 						shoted[j] = 4;
 						uzi->shot_stop[i] = 1;
@@ -303,18 +341,38 @@ namespace game_framework {
 				if (enemy_x[i] >= (-map->x) + rocket->boomx && enemy_x[i] <= (-map->x) + rocket->boomx + 200 && enemy_y[i] >= (-map->y) + rocket->boomy + 5 && enemy_y[i] <= (-map->y) + rocket->boomy + 100)
 				{
 					blood[i] = 0;
+					if (enemy_die[i] == 0)
+					{
+						score += 10;
+						enemy_die[i] = 1;
+					}
 				}
 				else if (enemy_x[i] >= (-map->x) + rocket->boomx && enemy_x[i] + 60 <= (-map->x) + rocket->boomx + 200 && enemy_y[i] >= (-map->y) + rocket->boomy + 5 && enemy_y[i] <= (-map->y) + rocket->boomy + 100)
 				{
 					blood[i] = 0;
+					if (enemy_die[i] == 0)
+					{
+						score += 10;
+						enemy_die[i] = 1;
+					}
 				}
 				else if (enemy_x[i] >= (-map->x) + rocket->boomx && enemy_x[i] <= (-map->x) + rocket->boomx + 200 && enemy_y[i] + 60 >= (-map->y) + rocket->boomy + 5 && enemy_y[i] + 60 <= (-map->y) + rocket->boomy + 100)
 				{
 					blood[i] = 0;
+					if (enemy_die[i] == 0)
+					{
+						score += 10;
+						enemy_die[i] = 1;
+					}
 				}
 				else if (enemy_x[i] + 60 >= (-map->x) + rocket->boomx && enemy_x[i] + 60 <= (-map->x) + rocket->boomx + 200 && enemy_y[i] + 60 >= (-map->y) + rocket->boomy + 5 && enemy_y[i] + 60 <= (-map->y) + rocket->boomy + 100)
 				{
 					blood[i] = 0;
+					if (enemy_die[i] == 0)
+					{
+						score += 10;
+						enemy_die[i] = 1;
+					}
 				}
 			}
 			
@@ -397,7 +455,7 @@ namespace game_framework {
 		}
 		else if (enemy_position == 2)
 		{
-			enemy_x[large] = 1700;
+			enemy_x[large] = 1600;
 			enemy_y[large] = randy();
 		}
 		else if (enemy_position == 3)
@@ -886,7 +944,7 @@ namespace game_framework {
 				else if (shoted[i] != 0) {
 					animation_right.OnMove();
 				}
-				else if (enemy_x[i] < 1700) {
+				else if (enemy_x[i] < 1600) {
 					enemy_x[i] += 1;
 					animation_right.OnMove();
 				}

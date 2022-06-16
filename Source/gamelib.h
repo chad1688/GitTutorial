@@ -270,6 +270,7 @@ private:
 class Share {
 public:
 	int choose_map = 0;
+	int score;
 	bool special = false;
 	bool special2 = false;
 };
