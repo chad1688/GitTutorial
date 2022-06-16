@@ -46,6 +46,7 @@
 #include "Arms.h"
 #include "Uzi.h"
 #include "Rocket.h"
+#include "enemy.h"
 namespace game_framework {
 	///////////////////////////////s//////////////////////////////////////////////
 	// Constants
@@ -54,7 +55,16 @@ namespace game_framework {
 	enum AUDIO_ID {				// 定義各種音效的編號
 		AUDIO_DING,				// 0
 		AUDIO_LAKE,				// 1
-		AUDIO_NTUT				// 2
+		AUDIO_NTUT,				// 2
+		AUDIO_HITFLOOR,
+		AUDIO_PICKUP,
+		AUDIO_PISTOL,
+		AUDIO_UZI,
+		AUDIO_ROCKET,
+		AUDIO_ZOMBIE_HIT,
+		AUDIO_EXPLOSION,
+		AUDIO_DIE,
+		AUDIO_END
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -67,16 +77,46 @@ namespace game_framework {
 		CGameStateInit(CGame *g);
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
-		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
+		//void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
+		void OnKeyDown(UINT, UINT, UINT);
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap logo;								// csie的logo
 		CMovingBitmap start;							// start
+		CMovingBitmap start2;
+		CMovingBitmap introduction;
+		CMovingBitmap introduction2;
+		CMovingBitmap introduction_text;
+		CMovingBitmap about_text;
+		CMovingBitmap about;
+		CMovingBitmap about2;
 		CMovingBitmap background;						// background
+		CMovingBitmap arrow_back;
+		CMovingBitmap text;
+		CMovingBitmap map1;
+		CMovingBitmap map2;
+		CMovingBitmap map3;
+		CMovingBitmap arrow1;
+		CMovingBitmap arrow2;
+		CMovingBitmap arrow3;
+		CMovingBitmap arrow4;
+		CMovingBitmap character;
+		bool choose_state = false;
+		bool touch_arrow1 = false;
+		bool touch_arrow3 = false;
+		bool touch_start = false;
+		bool touch_introduction = false;
+		bool touch_about = false;
+		bool touch_back = true;
+		int  touch[3] = { 0,0,0 };
+		int select_purpose = 0;
+		int temp = 0;
+		int temp2 = 0;
+		
 	};
-
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
 	// 每個Member function的Implementation都要弄懂
@@ -113,7 +153,7 @@ namespace game_framework {
 		CArms			arms;
 		Cuzi            uzi;
 		CRocket			rocket;
-		CMovingBitmap	Enemy;		//敵人
+		Cenemy	        enemy;		//敵人
 		int				eneX, eneY;
 		int show_text_x;
 		int show_text_y;
@@ -121,8 +161,27 @@ namespace game_framework {
 		int show_text_y2;
 		int show_text_x3;
 		int show_text_y3;
+		int total_blood;
+		int object_y[3] = { 400, 400, 400 };
+		int object_appear[3] = { 0,0,0 };
+		int total_object;
+		int temp[3] = { 0,0,0 };
+		int stop[3] = { 0,0,0 };
 		int test = 0;
-
+		int count = 0;
+		int count2 = 0;
+		int level=0;
+		int kill_all = 0;
+		int count_music_shot = 0;
+		int count_music_uzi = 0;
+		int count_music_rocket = 0;
+		int temp_i = 101;
+		bool music_stop = false;
+		bool music_stop2 = false;
+		bool music_stop3 = false;
+		int  music_stop4 = 0;
+		int die_count = 0;
+		
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -135,11 +194,17 @@ namespace game_framework {
 		CGameStateOver(CGame *g);
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();
+		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		int counter;	// 倒數之計數器
+		CMovingBitmap lose;
+		CMovingBitmap retry;
+		CMovingBitmap menu;
+		CMovingBitmap win;
 	};
 
 }

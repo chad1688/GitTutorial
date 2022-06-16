@@ -25,12 +25,13 @@ namespace game_framework {
 		int show_text;
 		int count2;
 		int now_arms;
+		bool die;
 		int r;
+		int my_arms[3];
 	protected:
 		Cuzi *uzi;
 		Cshot *shot;
 		CRocket *rocket;
-		int my_arms[3];
 		int touch_up;
 		int touch_down;
 		int count;

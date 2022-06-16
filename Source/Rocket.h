@@ -17,7 +17,8 @@ namespace game_framework {
 		//void LoadAnimation();
 		void shot_OnShow();
 		void Setspace(bool flag);
-		int	gunx, guny, mapx, mapy;
+		int	gunx_up, guny_up, gunx_down, guny_down, gunx_right, guny_right, gunx_left, guny_left, mapx, mapy;
+		int space_mapx, space_mapy;
 		bool isMovingright;
 		bool isMovingleft;
 		bool isMovingup;
@@ -27,6 +28,16 @@ namespace game_framework {
 		int infrontof1, left, right, back;
 		int space;
 		int show;
+		int temp_guny[40];
+		int temp_infrontof[40];
+		int temp_back[40];
+		int temp_right[40];
+		int temp_left[40];
+		int temp_gunx[40];
+		int shot_stop[40];
+		int boomx;
+		int boomy;
+		bool is_space;
 	protected:
 		CMovingBitmap shot_infrontof[100];
 		CMovingBitmap shot_left[100];
@@ -38,19 +49,9 @@ namespace game_framework {
 		//CAnimation	shot_right;
 		//CAnimation	shot_back;
 		Cmap *map;
-		
-		int temp_guny[40];
-		int temp_infrontof[40];
-		int temp_back[40];
-		int temp_right[40];
-		int temp_left[40];
 		int temp_bullet[40];
-		int temp_gunx[40];
 		int count;
-		
-		int boomx;
-		int boomy;
-		bool is_space;
+		int count2;
 	};
 #endif // !MAP_H
 }
