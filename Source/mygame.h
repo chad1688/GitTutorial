@@ -76,7 +76,6 @@ namespace game_framework {
 		CGameStateInit(CGame *g);
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
-		//void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
@@ -86,32 +85,32 @@ namespace game_framework {
 		CMovingBitmap logo;								// csie的logo
 		CMovingBitmap start;							// start
 		CMovingBitmap start2;
-		CMovingBitmap introduction;
-		CMovingBitmap introduction2;
-		CMovingBitmap introduction_text;
-		CMovingBitmap about_text;
-		CMovingBitmap about;
-		CMovingBitmap about2;
+		CMovingBitmap introduction;                     // 介紹按鈕
+		CMovingBitmap introduction2;                    // 按鈕按下
+		CMovingBitmap introduction_text;                // 介紹文字
+		CMovingBitmap about_text;                       // about文字
+		CMovingBitmap about;                            // about按鈕
+		CMovingBitmap about2;                           // 按鈕按下
 		CMovingBitmap background;						// background
-		CMovingBitmap arrow_back;
-		CMovingBitmap text;
-		CMovingBitmap map1;
-		CMovingBitmap map2;
-		CMovingBitmap map3;
-		CMovingBitmap arrow1;
-		CMovingBitmap arrow2;
-		CMovingBitmap arrow3;
-		CMovingBitmap arrow4;
-		CMovingBitmap character;
-		bool choose_state = false;
-		bool touch_arrow1 = false;
-		bool touch_arrow3 = false;
-		bool touch_start = false;
-		bool touch_introduction = false;
-		bool touch_about = false;
-		bool touch_back = true;
-		int  touch[3] = { 0,0,0 };
-		int select_purpose = 0;
+		CMovingBitmap arrow_back;                       // 後退鍵
+		CMovingBitmap text;                           
+		CMovingBitmap map1;                             // 地圖圖片
+		CMovingBitmap map2;                             // 地圖圖片
+		CMovingBitmap map3;                             // 地圖圖片
+		CMovingBitmap arrow1;                           // 左邊箭頭
+		CMovingBitmap arrow2;                           // 左邊箭頭按下
+		CMovingBitmap arrow3;                           // 右邊箭頭
+		CMovingBitmap arrow4;                           // 右邊箭頭按下
+		CMovingBitmap character;                        // 人物圖片
+		bool choose_state = false;                      // true進去選地圖畫面
+		bool touch_arrow1 = false;                      // 是否觸碰鍵頭
+		bool touch_arrow3 = false;                      // 是否觸碰鍵頭
+		bool touch_start = false;                       // 是否觸碰start
+		bool touch_introduction = false;                // 是否觸碰introduction
+		bool touch_about = false;                       // 是否觸碰about
+		bool touch_back = true;                         // 是否觸碰back
+		int  touch[3] = { 0,0,0 };                      
+		int select_purpose = 0;                         // 判斷是要進start about introduction
 		int temp = 0;
 		int temp2 = 0;
 		
@@ -127,8 +126,8 @@ namespace game_framework {
 		~CGameStateRun();
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();  								// 遊戲的初值及圖形設定
-		void OnKeyDown(UINT, UINT, UINT);
-		void OnKeyUp(UINT, UINT, UINT);
+		void OnKeyDown(UINT, UINT, UINT);               // 處理鍵盤動作
+		void OnKeyUp(UINT, UINT, UINT);                 // 處理鍵盤動作
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
@@ -139,16 +138,15 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap	whiltbackground;
-		CMovingBitmap	background;	// 背景圖
-		CPeople			people;		// 拍子
-		Cmap			map;
-		Cshot			shot;
+		CMovingBitmap	background;	                    // 背景圖
+		CPeople			people;		                    // 人物
+		Cmap			map;                            // 地圖
+		Cshot			shot;                         
 		CArms			arms;
 		Cuzi            uzi;
 		CRocket			rocket;
-		Cenemy	        enemy;		//敵人
+		Cenemy	        enemy;		                    //敵人
 		CScore			score;
-		int				eneX, eneY;
 		int show_text_x;
 		int show_text_y;
 		int show_text_x2;
@@ -194,7 +192,6 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		int counter;	// 倒數之計數器
 		CMovingBitmap lose;
 		CMovingBitmap retry;
 		CMovingBitmap menu;

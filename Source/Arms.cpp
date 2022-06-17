@@ -20,7 +20,6 @@ namespace game_framework {
 		touch_up = touch_down = 0;
 		for (int i = 1; i < 3; i++) {
 			my_arms[i] = 0;
-			my_bullet[i] = 0;
 		}
 		change_arms = false;
 	}
@@ -94,7 +93,6 @@ namespace game_framework {
 			{
 				uzi->shot_OnMove();
 				uzi->shot_OnMove2();
-				my_bullet[now_arms] -= 1;
 				if (uzi->empty_bullet == 1) {
 					my_arms[now_arms] = 0;
 					now_arms = 0;
@@ -111,7 +109,6 @@ namespace game_framework {
 			{
 				rocket->shot_OnMove();
 				rocket->shot_OnMove2();
-				my_bullet[now_arms] -= 1;
 				if (rocket->empty_bullet == 1) {
 					my_arms[now_arms] = 0;
 					now_arms = 0;

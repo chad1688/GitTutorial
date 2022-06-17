@@ -1,12 +1,7 @@
 
-
 #include <vector>
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class提供可以用鍵盤或滑鼠控制的擦子
-	// 看懂就可以改寫成自己的程式了
-	/////////////////////////////////////////////////////////////////////////////
 #ifndef MAP_H
 #define MAP_H
 
@@ -14,17 +9,17 @@ namespace game_framework {
 	public:
 		Cmap();
 		void LoadBitmap();
-		void OnMove_left();
-		void OnMove_right();
-		void OnMove_up();
-		void OnMove_down();
-		void OnMove_redbox_address();
-		void OnMove_redbox_live();
+		void OnMove_left();                                // 地圖向左移動
+		void OnMove_right();                               // 地圖向右移動
+		void OnMove_up();                                  // 地圖向上移動
+		void OnMove_down();	                               // 地圖向下移動
+		void OnMove_redbox_address();                      // 得到紅色盒子的X,Y
+		void OnMove_redbox_live();						   // 消失後過6秒自動生成
 		void OnShow();
-		bool isObject(int people_x,int people_y);
-		int redbox_appear3[4];
-		int redbox_x[4];
-		int redbox_y[4];
+		bool isObject(int people_x,int people_y);          // 是否碰到地圖物件
+		int redbox_appear3[4];                             // 是否踩到紅盒子
+ 		int redbox_x[4];                                   // 紅色盒子的X座標
+		int redbox_y[4];                                   // 紅色盒子的Y座標
 		int count_red_box3[4];
 		int temp3[4];
 		int x, y;

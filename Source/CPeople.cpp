@@ -129,7 +129,6 @@ namespace game_framework {
 		up_die.AddBitmap("RES/die9.bmp", RGB(255, 255, 255));
 		right_die.AddBitmap("RES/die9.bmp", RGB(255, 255, 255));
 		left_die.AddBitmap("RES/die9.bmp", RGB(255, 255, 255));
-		//animation_back.AddBitmap("RES/back3.bmp", RGB(184, 184, 184));
 	}
 
 	void CPeople::blood_OnMove()
@@ -450,7 +449,6 @@ namespace game_framework {
 	{
 		
 		const int STEP_SIZE = 5;
-		//TRACE("%d %d", (-map->x) + x,enemy_x);
 		if (isMovingLeft && isMovingRight == false && isMovingDown == false && isMovingUp == false && hit == 0) {
 			stop = 0;
 			for (int i = 0; i < large; i++)
@@ -640,7 +638,7 @@ namespace game_framework {
 				start_back.SetTopLeft(x, y);
 				start_back.ShowBitmap();
 			}
-			if (isMovingLeft && isMovingRight == false && isMovingDown == false && hit == 0) {
+			if (isMovingLeft  && hit == 0) {
 				left = 1;
 				infrontof1 = 0;
 				back = 0;
@@ -656,7 +654,7 @@ namespace game_framework {
 				animation_infrontof.SetTopLeft(x, y);
 				animation_infrontof.OnShow();
 			}
-			if (isMovingRight && isMovingLeft == false && isMovingDown == false && hit == 0) {
+			if (isMovingRight && isMovingLeft == false  && hit == 0) {
 				infrontof1 = 0;
 				left = 0;
 				right = 1;

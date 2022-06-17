@@ -11,9 +11,9 @@ namespace game_framework {
 	public:
 		CScore();
 		void LoadBitmap();
-		void OnMove();
+		void OnMove();       // 分數的變化
 		void OnShow();
-		void Over_Onshow();
+		void Over_Onshow();  // 在Gamestateover裡面show
 		int score;
 	protected:
 		CMovingBitmap	score1[10];

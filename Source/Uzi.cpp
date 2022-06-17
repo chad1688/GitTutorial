@@ -17,7 +17,6 @@ namespace game_framework {
 		count = 3;
 		empty_bullet = 0;
 		for (int i = 0; i < 100; i++) {
-			temp_bullet[i] = 0;
 			temp_infrontof[i] = 0;
 			temp_back[i] = 0;
 			temp_right[i] = 0;
@@ -89,7 +88,7 @@ namespace game_framework {
 		if (isMovingright && isMovingleft == false && isMovingup == false && isMovingdown == false) {
 			if (gunx_up == 330 || gunx_down == 300 || gunx_right == 330 || gunx_left == 300) {
 				for (int i = 0; i < 100; i++) {
-					if (temp_bullet[i] != 0 || temp_infrontof[i] != 0 || temp_back[i] != 0 || temp_left[i] != 0) {
+					if (temp_infrontof[i] != 0 || temp_back[i] != 0 || temp_left[i] != 0) {
 						temp_gunx[i] -= 10;
 					}
 				}
@@ -98,7 +97,7 @@ namespace game_framework {
 		if (isMovingleft && isMovingright == false && isMovingup == false && isMovingdown == false) {
 			if (gunx_up == 330 || gunx_down == 300 || gunx_right == 330 || gunx_left == 300) {
 				for (int i = 0; i < 100; i++) {
-					if (temp_bullet[i] != 0 || temp_infrontof[i] != 0 || temp_back[i] != 0 || temp_right[i] != 0) {
+					if (temp_infrontof[i] != 0 || temp_back[i] != 0 || temp_right[i] != 0) {
 						temp_gunx[i] += 10;
 					}
 				}
@@ -129,7 +128,6 @@ namespace game_framework {
 					if (temp_guny[i] >= (guny_up - 300) && map->isObject(temp_gunx[i], temp_guny[i] - 1) && shot_stop[i] == 0) {
 						temp_guny[i] -= 30;
 						shot_infrontof[i].SetTopLeft(temp_gunx[i], temp_guny[i]);
-						//shot_back[0].ShowBitmap();
 					}
 					else {
 						temp_gunx[i] = 0;
@@ -141,7 +139,6 @@ namespace game_framework {
 					if (temp_guny[i] <= (guny_down + 300) && map->isObject(temp_gunx[i], temp_guny[i] + 30) && shot_stop[i] == 0) {
 						temp_guny[i] += 30;
 						shot_back[i].SetTopLeft(temp_gunx[i], temp_guny[i]);
-						//shot_back[0].ShowBitmap();
 					}
 					else {
 						temp_gunx[i] = 0;
@@ -153,7 +150,6 @@ namespace game_framework {
 					if (temp_gunx[i] <= (gunx_right + 300) && map->isObject(temp_gunx[i] + 30, temp_guny[i]) && shot_stop[i] == 0) {
 						temp_gunx[i] += 30;
 						shot_right[i].SetTopLeft(temp_gunx[i], temp_guny[i]);
-						//shot_back[0].ShowBitmap();
 					}
 					else {
 						temp_gunx[i] = 0;
@@ -165,7 +161,6 @@ namespace game_framework {
 					if (temp_gunx[i] >= (gunx_left - 300) && map->isObject(temp_gunx[i] - 30, temp_guny[i]) && shot_stop[i] == 0) {
 						temp_gunx[i] -= 30;
 						shot_left[i].SetTopLeft(temp_gunx[i], temp_guny[i]);
-						//shot_back[0].ShowBitmap();
 					}
 					else {
 						temp_gunx[i] = 0;

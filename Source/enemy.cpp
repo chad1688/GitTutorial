@@ -170,13 +170,13 @@ namespace game_framework {
 					if (is_enemy2[i] == 0)
 					{
 						temp_y = enemy_y[i] + 20;
-						if (temp_y <= 1040 && map->isObject(map->x + enemy_x[i] + 60, map->y + enemy_y[i] + 60 + 10) && map->isObject(map->x + enemy_x[i], map->y + enemy_y[i] + 60 + 10))
+						if (temp_y <= 1020 && map->isObject(map->x + enemy_x[i] + 60, map->y + enemy_y[i] + 60 + 10) && map->isObject(map->x + enemy_x[i], map->y + enemy_y[i] + 60 + 10))
 						{
 							enemy_y[i] += 20;
 						}
-						else if(temp_y > 1040)
+						else if(temp_y > 1020)
 						{
-							enemy_y[i] = 1040;
+							enemy_y[i] = 1020;
 						}
 					}
 					blood[i] -= 10;
@@ -270,13 +270,13 @@ namespace game_framework {
 						if (is_enemy2[j] == 0)
 						{
 							temp_y = enemy_y[j] + 20;
-							if (temp_y <= 1040 && map->isObject(map->x + enemy_x[j] + 60, map->y + enemy_y[j] + 60 + 10) && map->isObject(map->x + enemy_x[j], map->y + enemy_y[j] + 60 + 10))
+							if (temp_y <= 1020 && map->isObject(map->x + enemy_x[j] + 60, map->y + enemy_y[j] + 60 + 10) && map->isObject(map->x + enemy_x[j], map->y + enemy_y[j] + 60 + 10))
 							{
 								enemy_y[j] += 20;
 							}
-							else if(temp_y > 1040)
+							else if(temp_y > 1020)
 							{ 
-								enemy_y[j] = 1040;
+								enemy_y[j] = 1020;
 							}
 						}
 						blood[j] -= 10;
@@ -377,7 +377,6 @@ namespace game_framework {
 			}
 			
 		}
-		//TRACE("%d", blood);
 		for (int i = 0; i < large; i++)
 		{
 			if (shoted[i] != 0)
@@ -427,7 +426,7 @@ namespace game_framework {
 		else
 		{
 			int min = 0;
-			int max = 1040;
+			int max = 1020;
 
 			int y = rand() % (max - min + 1) + min;
 			return y;
@@ -461,7 +460,7 @@ namespace game_framework {
 		else if (enemy_position == 3)
 		{
 			enemy_x[large] = randx();
-			enemy_y[large] = 1040;
+			enemy_y[large] = 1020;
 		}
 		else
 		{
@@ -470,7 +469,6 @@ namespace game_framework {
 		}
 		blood[large] = 100;
 		large++;
-		//TRACE("%d", large);
 	}
 
 	void Cenemy::isenemy(int x,int y,int adrress)
@@ -918,7 +916,7 @@ namespace game_framework {
 				else if (shoted[i] != 0) {
 					animation_back.OnMove();
 				}
-				else if (enemy_y[i] < 1040) {
+				else if (enemy_y[i] <= 1020) {
 					enemy_y[i] += 1;
 					animation_back.OnMove();
 				}
@@ -944,7 +942,7 @@ namespace game_framework {
 				else if (shoted[i] != 0) {
 					animation_right.OnMove();
 				}
-				else if (enemy_x[i] < 1600) {
+				else if (enemy_x[i] <= 1600) {
 					enemy_x[i] += 1;
 					animation_right.OnMove();
 				}
@@ -970,7 +968,7 @@ namespace game_framework {
 				else if (shoted[i] != 0) {
 					animation_left.OnMove();
 				}
-				else if (enemy_x > 0) {
+				else if (enemy_x[i] >= 0) {
 					enemy_x[i] -= 1;
 					animation_left.OnMove();
 				}
@@ -996,7 +994,7 @@ namespace game_framework {
 				else if (shoted[i] != 0) {
 					animation_infrontof.OnMove();
 				}
-				else if (enemy_y[i] > 0) {
+				else if (enemy_y[i] >= 0) {
 					enemy_y[i] -= 1;
 					animation_infrontof.OnMove();
 				}

@@ -89,7 +89,6 @@ namespace game_framework {
 						if (gun_index >= 2)
 							gun_index = 0;
 						redbox_x[gun_index] = MW * j - MW2;
-						//TRACE("%d", redbox_x[1]);
 						redbox_y[gun_index] = MH * i;
 						gun_index++;
 					}
@@ -104,7 +103,6 @@ namespace game_framework {
 						if (gun_index >= 4)
 							gun_index = 0;
 						redbox_x[gun_index] = MW * j - MW2;
-						//TRACE("%d", redbox_x[1]);
 						redbox_y[gun_index] = MH * i;
 						gun_index++;
 					}
@@ -119,7 +117,6 @@ namespace game_framework {
 						if (gun_index >= 4)
 							gun_index = 0;
 						redbox_x[gun_index] = MW * j - MW2;
-						//TRACE("%d", redbox_x[1]);
 						redbox_y[gun_index] = MH * i;
 						gun_index++;
 					}

@@ -1,7 +1,7 @@
 #include "map.h"
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
-	// 這個class提供可以用鍵盤或滑鼠控制的擦子
+	// 這個class提供可以用鍵盤或滑鼠控制的人物
 	// 看懂就可以改寫成自己的程式了
 	/////////////////////////////////////////////////////////////////////////////
 #ifndef CPEOPLE_H
@@ -10,32 +10,32 @@ namespace game_framework {
 	{
 	public:
 		CPeople();
-		int  GetX1();					// 擦子左上角 x 座標
-		int  GetY1();					// 擦子左上角 y 座標
-		int  GetX2();					// 擦子右下角 x 座標
-		int  GetY2();					// 擦子右下角 y 座標
-		bool GetisMovingup();
-		bool GetisMovingdown();
-		bool GetisMovingright();
-		bool GetisMovingleft();
-		void Setmonser_touch(bool flag);
-		void hit_OnMove();
+		int  GetX1();					                       // 人物左上角 x 座標
+		int  GetY1();					                       // 人物左上角 y 座標
+		int  GetX2();					                       // 人物右下角 x 座標
+		int  GetY2();					                       // 人物右下角 y 座標
+		bool GetisMovingup();								   // 是否按上
+		bool GetisMovingdown();								   // 是否按下
+		bool GetisMovingright();		                       // 是否按右
+		bool GetisMovingleft();								   // 是否按左
+		void Setmonser_touch(bool flag);                       // 是否被殭屍打到
+		void hit_OnMove();                                     // 被打到的動作
 		int count;
 		int timer;
-		void Getmapaddress(Cmap *m);
-		void Initialize();				// 設定擦子為初始值
+		void Getmapaddress(Cmap *m);                            // 獲得map的位址
+		void Initialize();				                        // 設定人物為初始值
 		void LoadBitmap();
-		void LoadAnimation();
-		void OnMove();					// 移動擦子
-		void people_touch_redbox();
-		void blood_OnMove();
-		void OnShow();					// 將擦子圖形貼到畫面
-		void SetMovingDown(bool flag);	// 設定是否正在往下移動
-		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		void SetMovingRight(bool flag); // 設定是否正在往右移動
-		void SetMovingUp(bool flag);	// 設定是否正在往上移動
-		void SetXY(int nx, int ny);		// 設定擦子左上角座標*/
-		int x, y;					// 擦子左上角座標
+		void LoadAnimation(); 
+		void OnMove();					                        // 移動人物
+		void people_touch_redbox();                             // 處理人物踩到紅盒子
+		void blood_OnMove();	                                // 人物血量變化
+		void OnShow();					                        // 將人物圖形貼到畫面
+		void SetMovingDown(bool flag);	                        // 設定是否正在往下移動
+		void SetMovingLeft(bool flag);	                        // 設定是否正在往左移動
+		void SetMovingRight(bool flag);                         // 設定是否正在往右移動
+		void SetMovingUp(bool flag);	                        // 設定是否正在往上移動
+		void SetXY(int nx, int ny);		                        // 設定人物左上角座標*/
+		int x, y;					                            // 人物左上角座標
 		int infrontof1 = 1, left = 0, right = 0, back = 0;
 		int red_box_appear3[4];
 		int add_arms;
@@ -64,7 +64,7 @@ namespace game_framework {
 		CMovingBitmap start_back;
 		CMovingBitmap start_right;
 		CMovingBitmap blood[10];
-		CAnimation animation_left;		// 擦子的動畫
+		CAnimation animation_left;		// 人物的動畫
 		CAnimation animation_infrontof;
 		CAnimation animation_right;
 		CAnimation animation_back;

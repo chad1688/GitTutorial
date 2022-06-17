@@ -78,7 +78,7 @@ namespace game_framework {
 		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
 		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
 		//
-		ShowInitProgress(0);	// 一開始的loading進度為0%
+		ShowInitProgress(0);	                                     // 一開始的loading進度為0%
 		//
 		// 開始載入資料
 		//
@@ -103,7 +103,7 @@ namespace game_framework {
 		map2.LoadBitmap("RES/436.bmp");
 		map3.LoadBitmap("RES/465.bmp");
 		CAudio::Instance()->Load(AUDIO_END, "sounds\\World.End.mp3");
-		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		Sleep(300);				                                  // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 		//
@@ -115,13 +115,6 @@ namespace game_framework {
 		choose_state = false;
 		s->choose_map = 0;
 	}
-
-	/*void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
-	{
-		const char KEY_SPACE = ' ';
-		if (nChar == KEY_SPACE)
-			choosemap = false;
-	}*/
 
 	void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
@@ -208,13 +201,12 @@ namespace game_framework {
 				touch_introduction = false;
 			}
 		}
-		//GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 	}
 
 	void CGameStateInit::OnShow()
 	{
 		//
-		// 貼上logo
+		// 貼上圖片
 		//
 
 		if (touch_arrow1 == false && temp == 1)
@@ -363,24 +355,6 @@ namespace game_framework {
 			}
 			
 		}
-		//
-		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
-		//
-		/*
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-		CFont f, *fp;
-		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
-		//pDC->TextOut(120, 220, "Please click mouse or press SPACE to begin.");
-		//pDC->TextOut(5, 395, "Press Ctrl-F to switch in between window mode and full screen mode.");
-		if (ENABLE_GAME_PAUSE)
-			pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
-		pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
-		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-		*/
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -425,15 +399,14 @@ namespace game_framework {
 		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
 		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
 		//
-		//ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
+		ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
 		//
 		// 開始載入資料
 		//
-		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 最終進度為100%
 		//
-		//ShowInitProgress(100);
+		ShowInitProgress(100);
 		lose.LoadBitmap("RES/lose.bmp", RGB(255, 255, 255));
 		retry.LoadBitmap("RES/retry.bmp", RGB(255, 255, 255));
 		menu.LoadBitmap("RES/menu.bmp", RGB(255, 255, 255));
@@ -458,7 +431,6 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame *g)
 		: CGameState(g)
 	{
-		eneX = eneY = 0;
 		map.choose_map = s->choose_map;
 		people.choose_map = s->choose_map;
 		enemy.choose_map = s->choose_map;
@@ -501,10 +473,6 @@ namespace game_framework {
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
-		//
-		// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
-		//
-		// SetCursor(AfxGetApp()->LoadCursor(IDC_GAMECURSOR));
 		die_count++;
 		if (people.die == false)
 		{
@@ -517,7 +485,6 @@ namespace game_framework {
 				if (map.isObject(people.GetX1(), people.GetY1() - 1) && map.isObject(people.GetX2(), people.GetY1() - 1)) {
 					people.OnMove();
 					rocket.up_isobject = false;
-					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
 				}
 				else
 				{
@@ -528,7 +495,6 @@ namespace game_framework {
 				if (map.isObject(people.GetX2() + 10, people.GetY2()) && map.isObject(people.GetX2() + 10, people.GetY1())) {
 					people.OnMove();
 					rocket.right_isobject = false;
-					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
 				}
 				else
 				{
@@ -539,7 +505,6 @@ namespace game_framework {
 				if (map.isObject(people.GetX1() - 1, people.GetY1()) && map.isObject(people.GetX1() - 1, people.GetY2())) {
 					people.OnMove();
 					rocket.left_isobject = false;
-					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
 				}
 				else
 				{
@@ -550,7 +515,6 @@ namespace game_framework {
 				if (map.isObject(people.GetX2(), people.GetY2() + 10) && map.isObject(people.GetX1(), people.GetY2() + 10)) {
 					people.OnMove();
 					rocket.down_isobject = false;
-					//CAudio::Instance()->Play(AUDIO_HITFLOOR);
 				}
 				else
 				{
@@ -558,6 +522,10 @@ namespace game_framework {
 				}
 			}
 			rocket.stop = people.stop;
+			//
+			//
+			// 人物觸碰紅色盒子
+			//
 			people.people_touch_redbox();
 			if (people.pickup == true)
 			{
@@ -570,6 +538,10 @@ namespace game_framework {
 			map.OnMove_redbox_live();
 			for (int i = 0; i < 4; i++)
 				people.red_box_appear3[i] = map.redbox_appear3[i];
+			//
+			//
+			// 人物扣血
+			//
 			people.blood_OnMove();
 		}
 		else
@@ -578,17 +550,26 @@ namespace game_framework {
 				music_stop4 = 1;
 			people.blood_OnMove();
 		}
+		//
+		//
+		// 播放死亡音效
+		//
 		if (music_stop4 == 1)
 		{
 			die_count = 0;
 			CAudio::Instance()->Play(AUDIO_DIE);
 			music_stop4 = 2;
 		}
+		//
+		//
+		// 傳分數給GameStateRun
+		//
 		if (die_count >= 90 && music_stop4 == 2)
 		{
 			s->score = enemy.score;
 			GotoGameState(GAME_STATE_OVER);
 		}
+		
 		uzi.isMovingright = people.GetisMovingright();
 		uzi.isMovingleft = people.GetisMovingleft();
 		uzi.isMovingup = people.GetisMovingup();
@@ -642,6 +623,10 @@ namespace game_framework {
 		count_music_shot++;
 		count_music_uzi++;
 		count_music_rocket++;
+		//
+		//
+		// 播放射擊音效
+		//
 		if (shot.space != 0 && arms.now_arms == 0 && music_stop2 == false)
 		{
 			CAudio::Instance()->Play(AUDIO_PISTOL, true);
@@ -682,6 +667,8 @@ namespace game_framework {
 		{
 			CAudio::Instance()->Play(AUDIO_EXPLOSION);
 		}
+
+
 		people.add_arms = arms.add_arms;
 		show_text_x = people.GetX1() + 20;
 		show_text_y = people.GetY1() - 30;
@@ -692,10 +679,13 @@ namespace game_framework {
 		total_blood = 0;
 		count++;
 		count2++;
-		
+		//
+		//
+		// 計算目前Level以及殭屍生成
+		//
 		if (level == 1)
 		{
-			if (enemy.large < 10 && count >= 30)
+			if (enemy.large < 10 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -703,7 +693,7 @@ namespace game_framework {
 		}
 		else if (level == 2)
 		{
-			if (enemy.large < 20 && count >= 30)
+			if (enemy.large < 20 && count >= 45)
 			{
 				enemy.born();
 				count = 0;
@@ -780,6 +770,10 @@ namespace game_framework {
 			GotoGameState(GAME_STATE_OVER);
 		}
 		
+		//
+		//
+		// 觸發密技
+		//
 		if (s->special == true && s->special2 == true)
 		{
 			level = 10;
@@ -796,8 +790,10 @@ namespace game_framework {
 			total_blood += enemy.blood[i];
 		}
 
-		
-
+		//
+		//
+		// 播放殭屍被打音效
+		//
 		for (int i = 0; i < enemy.large; i++)
 		{
 			if (enemy.shoted[i] != 0 && temp_i == 101)
@@ -815,11 +811,18 @@ namespace game_framework {
 				temp_i = 101;
 			}
 		}
-
+		//
+		//
+		// 殭屍扣血以及算分
+		//
 		enemy.blood_on_move();
 		score.score = enemy.score;
 		score.OnMove();
 
+		//
+		//
+		// 判斷是否要進下一個Level
+		//
 		if (total_blood > 0 && enemy.large > 0)
 		{
 			enemy.On_Move();
@@ -833,6 +836,7 @@ namespace game_framework {
 			{
 				enemy.shoted[i] = 0;
 				enemy.enemy_die[i] = 0; 
+				enemy.is_enemy[i] = 2;
 			}
 			count2 = 0;
 		}
@@ -982,13 +986,13 @@ namespace game_framework {
 
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		arms.change_arms = true;
+		
 		//people.SetMovingLeft(true);
 	}
 
 	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		arms.change_arms = false;
+		
 		//people.SetMovingLeft(false);
 	}
 
@@ -999,12 +1003,12 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		people.Setmonser_touch(true);
+		
 	}
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		people.Setmonser_touch(false);
+		
 	}
 
 	void CGameStateRun::OnShow()
@@ -1016,13 +1020,12 @@ namespace game_framework {
 		//        說，Move負責MVC中的Model，Show負責View，而View不應更動Model。
 		//
 		//
-		//  貼上背景圖、撞擊數、球、擦子、彈跳的球
+		//  貼上人物 殭屍 紅色盒子 印出撿起什麼槍以及Level
 		//
 		whiltbackground.ShowBitmap();
 		map.OnShow();
-		//people.shot_OnShow();
 		arms.OnShow();
-		people.OnShow();					// 貼上擦子
+		people.OnShow();					
 		for (int i = 0; i < 3; i++)
 		{
 			total_object += object_appear[i];
