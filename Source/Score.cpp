@@ -6,9 +6,6 @@
 #include "gamelib.h"
 #include "string"
 #include "Score.h"
-//#include <iostream>
-//#include <cstdlib>
-//#include <ctime>
 
 namespace game_framework {
 	CScore::CScore() {

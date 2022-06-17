@@ -1,9 +1,5 @@
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class提供可以用鍵盤或滑鼠控制的擦子
-	// 看懂就可以改寫成自己的程式了
-	/////////////////////////////////////////////////////////////////////////////
 #ifndef SCORE_H
 #define SCORE_H
 
@@ -22,5 +18,5 @@ namespace game_framework {
 		CMovingBitmap	score4[10];
 		int score_len;
 	};
-#endif // !MAP_H
+#endif 
 }

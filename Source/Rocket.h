@@ -1,9 +1,5 @@
 #include "map.h"
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class提供可以用鍵盤或滑鼠控制的擦子
-	// 看懂就可以改寫成自己的程式了
-	/////////////////////////////////////////////////////////////////////////////
 #ifndef Rocket_H
 #define Rocket_H
 
@@ -48,14 +44,10 @@ namespace game_framework {
 		CMovingBitmap shot_back[100];
 		CMovingBitmap shot_right[100];
 		CMovingBitmap boom;
-		//CAnimation  shot_infrontof;
-		//CAnimation	shot_left;
-		//CAnimation	shot_right;
-		//CAnimation	shot_back;
 		Cmap *map;
 		int temp_bullet[40];
 		int count;
 		int count2;
 	};
-#endif // !MAP_H
+#endif 
 }

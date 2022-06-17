@@ -5,10 +5,6 @@
 #include "Rocket.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class提供可以用鍵盤或滑鼠控制的擦子
-	// 看懂就可以改寫成自己的程式了
-	/////////////////////////////////////////////////////////////////////////////
 #ifndef ENEMY_H
 #define ENEMY_H
 
@@ -81,5 +77,5 @@ namespace game_framework {
 		int attack_right[100];
 		int attack_left[100];
 	};
-#endif // !MAP_H
+#endif 
 }

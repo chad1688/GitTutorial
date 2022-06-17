@@ -8,9 +8,6 @@
 #include "Arms.h"
 #include "Shot.h"
 #include "Uzi.h"
-//#include <iostream>
-//#include <cstdlib>
-//#include <ctime>
 
 namespace game_framework {
 	CArms::CArms() {
