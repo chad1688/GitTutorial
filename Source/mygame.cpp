@@ -451,29 +451,29 @@ namespace game_framework {
 		{
 			enemy.blood[i] = 0;
 			enemy.shoted[i] = 0;
-			enemy.is_enemy[i] = 2;
 			enemy.enemy_die[i] = 0;
+			enemy.is_enemy[i] = 2;
 		}
 		for (int i = 1; i < 3; i++)
 		{
 			arms.my_arms[i] = 0;
 		}
 		arms.now_arms = 0;
+		people.x = 300;
+		people.y = 300;
 		map.x = 0;
 		map.y = 0;
 		map.gun_index = 0;
 		people.blood_index = 0;
-		people.count_hit = 30;
-		people.hit = 0;
-		people.x = 300;
-		people.y = 300;
+		music_stop4 = 0;
 		people.monster_touch = false;
 		people.die = false;
+		people.hit = 0;
+		people.count_hit = 30;
 		people.up_die.Reset();
-		people.left_die.Reset();
 		people.down_die.Reset();
 		people.right_die.Reset();
-		music_stop4 = 0;
+		people.left_die.Reset();
 		s->special = false;
 		s->special2 = false;
 		enemy.score = 0;
@@ -548,19 +548,18 @@ namespace game_framework {
 			map.OnMove_redbox_live();
 			for (int i = 0; i < 4; i++)
 				people.red_box_appear3[i] = map.redbox_appear3[i];
-			people.hit_OnMove();
-			
+			//
+			//
+			// 人物扣血
+			//
+			people.blood_OnMove();
 		}
 		else
 		{
 			if (music_stop4 == 0)
 				music_stop4 = 1;
+			people.blood_OnMove();
 		}
-		//
-		//
-		// 人物扣血
-		//
-		people.blood_OnMove();
 		//
 		//
 		// 播放死亡音效
@@ -840,7 +839,7 @@ namespace game_framework {
 		if (total_blood > 0 && enemy.large > 0)
 		{
 			enemy.On_Move();
-			//people.hit_OnMove();
+			people.hit_OnMove();
 			people.large = enemy.large;
 		}
 		else if (total_blood <= 0 && enemy.large > 0 && kill_all == 0)
@@ -1033,16 +1032,7 @@ namespace game_framework {
 		whiltbackground.ShowBitmap();
 		map.OnShow();
 		arms.OnShow();
-		enemy.On_Show();
-		if (people.blood_index == 9)
-		{
-			people.die_OnShow();
-		}
-		else
-		{
-			people.OnShow();
-		}
-						
+		people.OnShow();					
 		for (int i = 0; i < 3; i++)
 		{
 			total_object += object_appear[i];
@@ -1207,7 +1197,7 @@ namespace game_framework {
 		//
 		//  貼上左上及右下角落的圖
 		//
-		
+		enemy.On_Show();
 		score.OnShow();
 	}
 }

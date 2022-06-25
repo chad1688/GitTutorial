@@ -26,7 +26,6 @@ namespace game_framework {
 		void people_touch_redbox();                             // 處理人物踩到紅盒子
 		void blood_OnMove();	                                // 人物血量變化
 		void OnShow();					                        // 將人物圖形貼到畫面
-		void die_OnShow();
 		void SetMovingDown(bool flag);	                        // 設定是否正在往下移動
 		void SetMovingLeft(bool flag);	                        // 設定是否正在往左移動
 		void SetMovingRight(bool flag);                         // 設定是否正在往右移動
@@ -69,7 +68,6 @@ namespace game_framework {
 		CAnimation animation_infrontof;
 		CAnimation animation_right;
 		CAnimation animation_back;
-	
 		Cmap *map;
 		
 		int map_x = 6, map_y = 7;	//人物在地圖的位置

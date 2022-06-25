@@ -136,41 +136,34 @@ namespace game_framework {
 			die = true;
 			if (infrontof1 == 1)
 			{
-				//up_die.SetTopLeft(x, y);
+				up_die.SetTopLeft(x, y);
 				if (!(up_die.IsFinalBitmap()))
 				{
 					up_die.OnMove();
 				}
 			}
-			else if (back == 1)
+			if (back == 1)
 			{
-				//down_die.SetTopLeft(x, y);
+				down_die.SetTopLeft(x, y);
 				if (!(down_die.IsFinalBitmap()))
 				{
 					down_die.OnMove();
 				}
 			}
-			else if (right == 1)
+			if (right == 1)
 			{
-				//right_die.SetTopLeft(x, y);
+				right_die.SetTopLeft(x, y);
 				if (!(right_die.IsFinalBitmap()))
 				{
 					right_die.OnMove();
 				}
 			}
-			else if (left == 1)
+			if (left == 1)
 			{
-				//left_die.SetTopLeft(x, y);
+				left_die.SetTopLeft(x, y);
 				if (!(left_die.IsFinalBitmap()))
 				{
 					left_die.OnMove();
-				}
-			}
-			else
-			{
-				if (!(up_die.IsFinalBitmap()))
-				{
-					up_die.OnMove();
 				}
 			}
 		}
@@ -621,110 +614,103 @@ namespace game_framework {
 		monster_touch = flag;
 	}
 
-	void CPeople::die_OnShow()
-	{
-		if (infrontof1 == 1)
-		{
-			up_die.SetTopLeft(x, y);
-			up_die.OnShow();
-		}
-		else if (back == 1)
-		{
-			down_die.SetTopLeft(x, y);
-			down_die.OnShow();
-		}
-		else if (right == 1)
-		{
-			right_die.SetTopLeft(x, y);
-			right_die.OnShow();
-		}
-		else if (left == 1)
-		{
-			left_die.SetTopLeft(x, y);
-			left_die.OnShow();
-		}
-		else
-		{
-			up_die.SetTopLeft(x, y);
-			up_die.OnShow();
-		}
-	}
-
 	void CPeople::OnShow()
 	{
-		blood[blood_index].ShowBitmap();
-		if (infrontof1 == 1 && !isMovingLeft && !isMovingDown && !isMovingRight && !isMovingUp && hit == 0) {
-			start_infrontof.SetTopLeft(x, y);
-			start_infrontof.ShowBitmap();
-		}
-		if (left == 1 && !isMovingLeft && !isMovingDown && !isMovingRight && !isMovingUp && hit == 0) {
-			start_left.SetTopLeft(x, y);
-			start_left.ShowBitmap();
-		}
-		if (right == 1 && !isMovingLeft && !isMovingDown && !isMovingRight && !isMovingUp && hit == 0) {
-			start_right.SetTopLeft(x, y);
-			start_right.ShowBitmap();
-		}
-		if (back == 1 && !isMovingLeft && !isMovingDown && !isMovingRight && !isMovingUp && hit == 0) {
-			start_back.SetTopLeft(x, y);
-			start_back.ShowBitmap();
-		}
-		if (isMovingLeft  && hit == 0) {
-			left = 1;
-			infrontof1 = 0;
-			back = 0;
-			right = 0;
-			animation_left.SetTopLeft(x, y);
-			animation_left.OnShow();
-		}
-		if (isMovingUp && isMovingLeft == false && isMovingRight == false && hit == 0) {
-			infrontof1 = 1;
-			left = 0;
-			right = 0;
-			back = 0;
-			animation_infrontof.SetTopLeft(x, y);
-			animation_infrontof.OnShow();
-		}
-		if (isMovingRight && isMovingLeft == false  && hit == 0) {
-			infrontof1 = 0;
-			left = 0;
-			right = 1;
-			back = 0;
-			animation_right.SetTopLeft(x, y);
-			animation_right.OnShow();
-		}
-		if (isMovingDown && isMovingUp == false && isMovingLeft == false && isMovingRight == false && hit == 0) {
-			infrontof1 = 0;
-			left = 0;
-			right = 0;
-			back = 1;
-			animation_back.SetTopLeft(x, y);
-			animation_back.OnShow();
-		}
-
-		if (hit != 0)
+		if (die == false)
 		{
-			if (infrontof1 == 1)
-			{
-				animation_infrontof.SetTopLeft(x, y);
-				animation_infrontof.OnShow();
+			blood[blood_index].ShowBitmap();
+			if (infrontof1 == 1 && !isMovingLeft && !isMovingDown && !isMovingRight && !isMovingUp && hit == 0) {
+				start_infrontof.SetTopLeft(x, y);
+				start_infrontof.ShowBitmap();
 			}
-			if (back == 1)
-			{
-				animation_back.SetTopLeft(x, y);
-				animation_back.OnShow();
+			if (left == 1 && !isMovingLeft && !isMovingDown && !isMovingRight && !isMovingUp && hit == 0) {
+				start_left.SetTopLeft(x, y);
+				start_left.ShowBitmap();
 			}
-			if (right == 1)
-			{
-				animation_right.SetTopLeft(x, y);
-				animation_right.OnShow();
+			if (right == 1 && !isMovingLeft && !isMovingDown && !isMovingRight && !isMovingUp && hit == 0) {
+				start_right.SetTopLeft(x, y);
+				start_right.ShowBitmap();
 			}
-			if (left == 1)
-			{
+			if (back == 1 && !isMovingLeft && !isMovingDown && !isMovingRight && !isMovingUp && hit == 0) {
+				start_back.SetTopLeft(x, y);
+				start_back.ShowBitmap();
+			}
+			if (isMovingLeft  && hit == 0) {
+				left = 1;
+				infrontof1 = 0;
+				back = 0;
+				right = 0;
 				animation_left.SetTopLeft(x, y);
 				animation_left.OnShow();
 			}
+			if (isMovingUp && isMovingLeft == false && isMovingRight == false && hit == 0) {
+				infrontof1 = 1;
+				left = 0;
+				right = 0;
+				back = 0;
+				animation_infrontof.SetTopLeft(x, y);
+				animation_infrontof.OnShow();
+			}
+			if (isMovingRight && isMovingLeft == false  && hit == 0) {
+				infrontof1 = 0;
+				left = 0;
+				right = 1;
+				back = 0;
+				animation_right.SetTopLeft(x, y);
+				animation_right.OnShow();
+			}
+			if (isMovingDown && isMovingUp == false && isMovingLeft == false && isMovingRight == false && hit == 0) {
+				infrontof1 = 0;
+				left = 0;
+				right = 0;
+				back = 1;
+				animation_back.SetTopLeft(x, y);
+				animation_back.OnShow();
+			}
+
+			if (hit != 0)
+			{
+				if (infrontof1 == 1)
+				{
+					animation_infrontof.SetTopLeft(x, y);
+					animation_infrontof.OnShow();
+				}
+				if (back == 1)
+				{
+					animation_back.SetTopLeft(x, y);
+					animation_back.OnShow();
+				}
+				if (right == 1)
+				{
+					animation_right.SetTopLeft(x, y);
+					animation_right.OnShow();
+				}
+				if (left == 1)
+				{
+					animation_left.SetTopLeft(x, y);
+					animation_left.OnShow();
+				}
 					
+			}
+		}
+		else
+		{
+			if (infrontof1 == 1)
+			{
+				up_die.OnShow();
+			}
+			if (back == 1)
+			{
+				down_die.OnShow();
+			}
+			if (right == 1)
+			{
+				right_die.OnShow();
+			}
+			if (left == 1)
+			{
+				left_die.OnShow();
+			}
 		}
 	}
 }
