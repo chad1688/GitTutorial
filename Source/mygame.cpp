@@ -1032,6 +1032,7 @@ namespace game_framework {
 		whiltbackground.ShowBitmap();
 		map.OnShow();
 		arms.OnShow();
+		enemy.On_Show();
 		people.OnShow();					
 		for (int i = 0; i < 3; i++)
 		{
@@ -1197,7 +1198,6 @@ namespace game_framework {
 		//
 		//  貼上左上及右下角落的圖
 		//
-		enemy.On_Show();
 		score.OnShow();
 	}
 }
