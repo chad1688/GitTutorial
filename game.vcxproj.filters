@@ -117,12 +117,6 @@
     <ClCompile Include="Source\StdAfx.cpp">
       <Filter>MFC</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CBall.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CBouncingBall.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\mygame.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -142,6 +136,12 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Rocket.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\enemy.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Score.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -173,12 +173,6 @@
     <ClInclude Include="Source\mygame.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CBall.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CBouncingBall.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\map.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -195,6 +189,12 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Rocket.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\enemy.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Score.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

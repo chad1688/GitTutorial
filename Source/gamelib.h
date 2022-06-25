@@ -68,9 +68,9 @@
 
 #define SIZE_X				 640		// 設定遊戲畫面的解析度為640x480
 #define SIZE_Y				 480		// 註：若不使用標準的解析度，則不能切換到全螢幕
-#define OPEN_AS_FULLSCREEN	 false		// 是否以全螢幕方式開啟遊戲
+#define OPEN_AS_FULLSCREEN	 true		// 是否以全螢幕方式開啟遊戲
 #define SHOW_LOAD_PROGRESS   true		// 是否顯示loading(OnInit)的進度
-#define DEFAULT_BG_COLOR	 RGB(0,0,0)	// 遊戲畫面預設的背景顏色(黑色)
+#define DEFAULT_BG_COLOR	 RGB(255,255,255)	// 遊戲畫面預設的背景顏色(黑色)
 #define GAME_CYCLE_TIME		 33		    // 每33ms跑一次Move及Show(每秒30次)
 #define SHOW_GAME_CYCLE_TIME false		// 是否在debug mode顯示cycle time
 #define ENABLE_GAME_PAUSE	 true		// 是否允許以 Ctrl-Q 暫停遊戲
@@ -267,6 +267,14 @@ private:
 	bool isBmpLoaded;				// 是否已經載入圖形
 };
 
+class Share {
+public:
+	int choose_map = 0;
+	int score;
+	bool special = false;
+	bool special2 = false;
+};
+
 /////////////////////////////////////////////////////////////////////////////
 // 宣告尚未定義的class
 /////////////////////////////////////////////////////////////////////////////
@@ -299,6 +307,7 @@ public:
 	virtual void OnMouseMove(UINT nFlags, CPoint point) {}  // 處理滑鼠的動作 
 	virtual void OnRButtonDown(UINT nFlags, CPoint point) {}// 處理滑鼠的動作
 	virtual void OnRButtonUp(UINT nFlags, CPoint point) {}	// 處理滑鼠的動作
+	Share *s;
 protected:
 	void GotoGameState(int state);							// 跳躍至指定的state
 	void ShowInitProgress(int percent);						// 顯示初始化的進度
@@ -338,12 +347,13 @@ public:
 	void OnSuspend();								// 處理「待命」的動作
 	void SetGameState(int);
 	static CGame *Instance();
+	Share s;
 private:
 	bool			running;			// 遊戲是否正在進行中(未被Pause)
 	bool            suspended;			// 遊戲是否被suspended
 	const int		NUM_GAME_STATES;	// 遊戲的狀態數(3個狀態)
 	CGameState		*gameState;			// pointer指向目前的遊戲狀態
-	CGameState		*gameStateTable[3];	// 遊戲狀態物件的pointer
+	CGameState		*gameStateTable[4];	// 遊戲狀態物件的pointer
 	static CGame	instance;			// 遊戲唯一的instance
 };
 

@@ -272,9 +272,6 @@ void CInteger::LoadBitmap()
 	// digit[i]為class varibale，所以必須避免重複LoadBitmap
 	//
 	if (!isBmpLoaded) {
-		int d[11]={IDB_0,IDB_1,IDB_2,IDB_3,IDB_4,IDB_5,IDB_6,IDB_7,IDB_8,IDB_9,IDB_MINUS};
-		for (int i=0; i < 11; i++)
-			digit[i].LoadBitmap(d[i],RGB(255,255,255));
 		isBmpLoaded = true;
 	}
 }
@@ -424,6 +421,7 @@ int CMovingBitmap::Width()
 CGameState::CGameState(CGame *g)
 {
 	game = g; 	// 設定game的pointer
+	s = &(g->s);
 }
 
 void CGameState::GotoGameState(int state)
@@ -437,10 +435,14 @@ void CGameState::ShowInitProgress(int percent)
 		return;
 	const int bar_width = SIZE_X * 2 / 3;
 	const int bar_height = SIZE_Y / 20;
-	const int x1 = (SIZE_X - bar_width) / 2;
+	/*const int x1 = (SIZE_X - bar_width) / 2;
 	const int x2 = x1 + bar_width;
 	const int y1 = (SIZE_Y - bar_height) / 2;
-	const int y2 = y1 + bar_height;
+	const int y2 = y1 + bar_height;*/
+	const int x1 = 120;
+	const int x2 = 125 + bar_width;
+	const int y1 = 350;
+	const int y2 = 350 + bar_height;
 	const int pen_width = bar_height / 8;
 	const int progress_x1 = x1 + pen_width;
 	const int progress_x2 = progress_x1 + percent * (bar_width-2*pen_width) / 100;
@@ -449,10 +451,10 @@ void CGameState::ShowInitProgress(int percent)
 	const int progress_y2 = y2 - pen_width;
 
 	CDDraw::BltBackColor(DEFAULT_BG_COLOR);		// 將 Back Plain 塗上預設的顏色
-	CMovingBitmap loading;						// 貼上loading圖示
-	loading.LoadBitmap(IDB_LOADING, RGB(0,0,0));
-	loading.SetTopLeft((SIZE_X - loading.Width())/2, y1 - 2 * loading.Height());
-	loading.ShowBitmap();
+	CMovingBitmap shape;
+	shape.LoadBitmap("RES/9.bmp", RGB(255, 255, 255));
+	shape.SetTopLeft(75, 100);
+	shape.ShowBitmap();
 	//
 	// 以下為CDC的用法
 	//
@@ -460,7 +462,7 @@ void CGameState::ShowInitProgress(int percent)
 	CPen *pp, p(PS_NULL, 0, RGB(0,0,0));		// 清除pen
 	pp = pDC->SelectObject(&p);
 
-	CBrush *pb, b(RGB(0,255,0));				// 畫綠色 progress框
+	CBrush *pb, b(RGB(0,0,0));				// 畫色 progress框
 	pb = pDC->SelectObject(&b);
 	pDC->Rectangle(x1,y1,x2,y2);				
 
@@ -468,7 +470,7 @@ void CGameState::ShowInitProgress(int percent)
 	pDC->SelectObject(&b1);
 	pDC->Rectangle(progress_x1,progress_y1,progress_x2_end,progress_y2);
 
-	CBrush b2(RGB(255,255,0));					// 畫黃色 progrss進度
+	CBrush b2(RGB(255,0,0));					// 畫黑色 progrss進度
 	pDC->SelectObject(&b2);
 	pDC->Rectangle(progress_x1,progress_y1,progress_x2,progress_y2);
 
